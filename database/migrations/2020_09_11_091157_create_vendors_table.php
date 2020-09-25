@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateVendorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('vendors', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
@@ -22,14 +22,26 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
             $table->string('phone')->unique()->nullable();
+            $table->string('store_name');
+            $table->string('store_slug');
+            $table->string('brand_logo');
+            $table->string('brand_banner')->nullable();
             $table->string('gender')->nullable();
             $table->string('dob')->nullable();
+            $table->string('street_1')->nullable();
+            $table->string('street_2')->nullable();
             $table->string('city')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('country')->nullable();
-            $table->string('address')->nullable();
+            $table->string('banking_type');
+            $table->string('account_name');
+            $table->string('account_number');
+            $table->string('bank_name')->nullable();
+            $table->string('branch_name')->nullable();
+            $table->string('commission_percent');
             $table->string('provider')->nullable();
             $table->string('provider_id')->unique()->nullable();
+            $table->boolean('is_featured')->default(0);
             $table->boolean('is_active')->default(0);
             $table->rememberToken();
             $table->timestamps();
@@ -43,6 +55,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('vendors');
     }
 }

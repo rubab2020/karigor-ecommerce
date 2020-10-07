@@ -15,17 +15,17 @@ class CreateVendorsTable extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('photo')->nullable();
             $table->string('phone')->unique()->nullable();
-            $table->string('store_name');
-            $table->string('store_slug');
+            $table->string('shop_name');
+            $table->string('shop_slug');
             $table->string('brand_logo');
             $table->string('brand_banner')->nullable();
+            $table->string('brand_page_link')->nullable();
             $table->string('gender')->nullable();
             $table->string('dob')->nullable();
             $table->string('street_1')->nullable();

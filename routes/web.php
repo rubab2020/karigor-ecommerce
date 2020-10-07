@@ -17,6 +17,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify' => true]);
+// user routes
 
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Admin routes
+Route::prefix('admin')->group(function(){
+    Route::get('/', 'Users\Admin\AdminController@index')->name('admin.dashboard');
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/register', 'Auth\AdminRegisterController@showRegisterForm')->name('admin.register');
+    Route::post('/register', 'Auth\AdminRegisterController@register')->name('admin.register.submit');
+});
+
+
+// Vendor routes
+Route::prefix('vendor')->group(function(){
+    Route::get('/', 'Users\Vendor\VendorController@index')->name('vendor.dashboard');
+    Route::get('/login', 'Auth\VendorLoginController@showLoginForm')->name('vendor.login');
+    Route::post('/login', 'Auth\VendorLoginController@login')->name('vendor.login.submit');
+    Route::get('/register', 'Auth\VendorRegisterController@showRegisterForm')->name('vendor.register');
+    Route::post('/register', 'Auth\VendorRegisterController@register')->name('vendor.register.submit');
+});

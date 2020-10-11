@@ -19,8 +19,8 @@ Route::get('/', function () {
 
 // user routes
 
-Auth::routes(['verify' => true]);
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes(['verify' => true]);
+// Route::get('/home', 'HomeController@index')->name('home');
 
 // Admin routes
 Route::prefix('admin')->group(function(){

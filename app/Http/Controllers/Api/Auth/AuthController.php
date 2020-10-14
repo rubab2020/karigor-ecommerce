@@ -62,8 +62,7 @@ class AuthController extends ApiController
         }
 
         $user = User::create([
-            'first_name' => $credentials['first_name'],
-            'last_name' => $credentials['last_name'],
+            'name' => $credentials['name'],
             'email' => $credentials['email'],
             'phone' => $credentials['phone'],
             'password' => bcrypt($credentials['password'])
@@ -109,17 +108,16 @@ class AuthController extends ApiController
     public function registerValidation($credentials)
     {
         $rules = [
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
+                'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'phone' => 'required|string|min:10|unique:users',
                 'password' => [
                     'required',
                     'string',
                     'min:8',              // must be at least 8 characters in length
-                    'regex:/[a-z]/',      // must contain at least one lowercase letter
-                    'regex:/[A-Z]/',      // must contain at least one uppercase letter
-                    'regex:/[0-9]/',      // must contain at least one digit
+                    // 'regex:/[a-z]/',      // must contain at least one lowercase letter
+                    // 'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                    // 'regex:/[0-9]/',      // must contain at least one digit
                     // 'regex:/[@$!%*#?&]/', // must contain a special character
                 ],
             ];
@@ -145,8 +143,7 @@ class AuthController extends ApiController
 
 		return [
 			'id'          => $this->encodeHelper->encodeData($user['id']),
-            'first_name'  => $user['first_name'],
-            'last_name'   => $user['last_name'],
+            'name'        => $user['name'],
             'email'       => $user['email'],
             'photo'       => $user['photo']
 		];

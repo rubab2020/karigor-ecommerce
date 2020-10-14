@@ -71,21 +71,9 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-sm-2 col-form-label">FB Messenger Code</label>
-										<div class="col-sm-10">
-											<textarea name="fb_messenger_code" class="form-control">{{ $options['fb_messenger_code'] }}</textarea>
-										</div>
-									</div>
-									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">Google Analytics Code</label>
 										<div class="col-sm-10">
 											<textarea name="google_analytics" class="form-control">{{ $options['google_analytics'] }}</textarea>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label">Messenger Link</label>
-										<div class="col-sm-10">
-											<textarea name="messenger_link" class="form-control">{{ $options['messenger_link'] }}</textarea>
 										</div>
 									</div>
 							  </div>

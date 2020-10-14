@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="{{ asset('css/jquery-3.5.1.slim.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -17,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -41,13 +43,25 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                @if(request()->is('admin*'))
+                                    <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
+                                @elseif(request()->is('vendor*'))
+                                    <a class="nav-link" href="{{ route('vendor.login') }}">{{ __('Login') }}</a>
+                                @else
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                @endif
                             </li>
-                            @if (Route::has('register'))
+                            <!-- @if (Route::has('register')) -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    @if(request()->is('admin*'))
+                                        <a class="nav-link" href="{{ route('admin.register') }}">{{ __('Register') }}</a>
+                                    @elseif(request()->is('vendor*'))
+                                        <a class="nav-link" href="{{ route('vendor.register') }}">{{ __('Register') }}</a>
+                                    @else
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    @endif
                                 </li>
-                            @endif
+                            <!-- @endif -->
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

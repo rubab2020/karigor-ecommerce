@@ -38,6 +38,17 @@
 						<li><a href="/admin/attribute-options">Attribute Options</a></li>
 					</ul>
 				</li> -->
+				<li><a href="javascript:void(0);" class="waves-effect"><i
+								class="mdi mdi-settings m-r-5"></i><span> Products <span
+									class="float-right menu-arrow"><i
+										class="mdi mdi-chevron-right"></i></span></span></a>
+					<ul class="submenu">
+						<li><a href="/admin/products">All Products</a></li>
+						<li><a href="/admin/categories">Categories</a></li>
+						<li><a href="/admin/attributes">Attributes</a></li>
+						<li><a href="/admin/tags">Tags</a></li>
+					</ul>
+				</li>
 				<li>
 					<a href="javascript:void(0);" class="waves-effect">
 						<i class="mdi mdi-pencil m-r-5"></i>

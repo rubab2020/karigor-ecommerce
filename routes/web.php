@@ -41,6 +41,8 @@ Route::prefix('admin')->group(function(){
         $inboxes = App\Models\ContactUs::all();
         return view('admin.contactus-inbox', compact('inboxes'));
     });
+
+    Route::resource('categories', 'Admin\CategoryController');
 });
 
 

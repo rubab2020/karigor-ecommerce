@@ -1,7 +1,7 @@
 @extends('layouts.admin-default')
 @section('content')
   <div class="page-title-box">
-    <div class="row align-items-center">
+  	<div class="row align-items-center">
       <!-- Breadcrumbs-->
       <div class="col-sm-6">
         <h4 class="page-title">Edit Category</h4>
@@ -13,7 +13,7 @@
       </div>
       <!--menu-->
     </div>
-
+    
     <!-- add main form-->
     {!! Form::model($category, ['url' => '/admin/categories/'.$category->id, 'method'=>'PATCH', 'files'=>true]) !!}
       @include('admin.category.form', ['submitButtonText' => 'Update'])

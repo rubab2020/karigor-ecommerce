@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Slider;
+use App\Karigor\Helpers\CustomHelper;
 
 class SliderController extends Controller
 {
+    private $uploadPath = 'uploads/sliders/';
     /**
      * Display a listing of the resource.
      *
@@ -33,9 +36,16 @@ class SliderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Slider $slider)
     {
-        //
+
+        $imageBgName = CustomHelper::saveImage($request->file('image'), $this->uploadPath, 600, 600);
+        $imageSmName = CustomHelper::saveImage($request->file('image'), $this->uploadPath, 300, 300);
+        $slider->link = $request->input('link');
+        $slider->image_bg = $imageBgName;
+        $slider->image_sm = $imageSmName;
+        $slider->save();
+        return redirect(route('slider.index'))->with('success', 'Saved');
     }
 
     /**

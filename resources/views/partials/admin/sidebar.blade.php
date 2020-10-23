@@ -63,8 +63,8 @@
 					</ul>
 				</li>
 				<li>
-					<a href="/admin/slider" class="waves-effect">
-						<i class="mdi mdi-flag m-r-5"></i><span>Slider</span>
+					<a href="/admin/sliders" class="waves-effect">
+						<i class="mdi mdi-flag m-r-5"></i><span>Sliders</span>
 					</a>
 				</li>
 				<li>

@@ -17,6 +17,9 @@ class SliderController extends Controller
      */
     public function index()
     {
+        $uplaodPath = $this->uploadPath;
+        $sliders = Slider::get();
+        return view('admin.slider.index', compact('sliders', 'uplaodPath'));
     }
 
     /**
@@ -45,7 +48,7 @@ class SliderController extends Controller
         $slider->image_bg = $imageBgName;
         $slider->image_sm = $imageSmName;
         $slider->save();
-        return redirect(route('slider.index'))->with('success', 'Saved');
+        return redirect(route('sliders.index'))->with('success', 'Saved');
     }
 
     /**

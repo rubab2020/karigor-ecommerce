@@ -35,7 +35,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('blog-category', 'Admin\BlogCategoryController');
 
     // routes for slider
-    Route::resource('slider', 'Admin\SliderController');
+    Route::resource('sliders', 'Admin\SliderController');
 
     Route::get('settings/edit', 'Admin\SettingController@edit');
     Route::post('settings/update', 'Admin\SettingController@update');

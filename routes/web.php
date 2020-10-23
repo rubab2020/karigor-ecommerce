@@ -23,7 +23,7 @@ Auth::routes(['verify' => true]);
 // Route::get('/home', 'HomeController@index')->name('home');
 
 // Admin routes
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->group(function () {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/register', 'Auth\AdminRegisterController@showRegisterForm')->name('admin.register');
@@ -34,10 +34,13 @@ Route::prefix('admin')->group(function(){
     Route::resource('blogs', 'Admin\BlogController');
     Route::resource('blog-category', 'Admin\BlogCategoryController');
 
+    // routes for slider
+    Route::resource('slider', 'Admin\SliderController');
+
     Route::get('settings/edit', 'Admin\SettingController@edit');
     Route::post('settings/update', 'Admin\SettingController@update');
 
-    Route::get('contact-us/inbox', function(){
+    Route::get('contact-us/inbox', function () {
         $inboxes = App\Models\ContactUs::all();
         return view('admin.contactus-inbox', compact('inboxes'));
     });
@@ -47,7 +50,7 @@ Route::prefix('admin')->group(function(){
 
 
 // Vendor routes
-Route::prefix('vendor')->group(function(){
+Route::prefix('vendor')->group(function () {
     Route::get('/login', 'Auth\VendorLoginController@showLoginForm')->name('vendor.login');
     Route::post('/login', 'Auth\VendorLoginController@login')->name('vendor.login.submit');
     Route::get('/register', 'Auth\VendorRegisterController@showRegisterForm')->name('vendor.register');

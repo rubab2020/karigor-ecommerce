@@ -101,7 +101,6 @@
 @section('scripts')
 	<!-- js for toggle -->
 	<script src="{{ asset('js/bootstrap4-toggle.min.js') }}"></script>
-
 	<!-- Required datatable js -->
 	<script src="{{asset('admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 	<script src="{{asset('admin/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>

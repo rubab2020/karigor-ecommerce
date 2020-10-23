@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.jpg') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @yield('head')
+    @yield('header')
 
     <link 
       href="{{asset('admin/css/bootstrap.min.css')}}" 

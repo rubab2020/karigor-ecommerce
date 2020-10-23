@@ -1,10 +1,10 @@
 @extends('layouts.admin-default')
 @section('content')
-    <div class="page-title-box">
-        @include('partials.admin.form.edit-breadcrumbs', ['featureName' => 'attribute'])
-    
-        {!! Form::model($attribute, ['url' => '/admin/attributes/'.$attribute->id, 'method'=>'PATCH', 'files'=>true]) !!}
-            @include('admin.attribute.form', ['submitButtonText' => 'Update'])
-        {!! Form::close() !!}
-    </div>
+	<div class="page-title-box">
+		@include('partials.admin.form.edit-breadcrumbs', ['featureName' => 'attribute'])
+	
+		{!! Form::model($attribute, ['url' => '/admin/attributes/'.$attribute->id, 'method'=>'PATCH', 'files'=>true]) !!}
+			@include('admin.attribute.form', ['submitButtonText' => 'Update'])
+		{!! Form::close() !!}
+	</div>
 @endsection

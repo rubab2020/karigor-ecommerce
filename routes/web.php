@@ -32,7 +32,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/dashboard', 'Admin\AdminController@index')->name('admin.dashboard');
 
     Route::resource('blogs', 'Admin\BlogController');
-    Route::resource('blog-category', 'Admin\BlogCategoryController');
+    Route::resource('blog-categories', 'Admin\BlogCategoryController');
 
     Route::get('settings/edit', 'Admin\SettingController@edit');
     Route::post('settings/update', 'Admin\SettingController@update');

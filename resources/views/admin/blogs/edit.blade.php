@@ -2,19 +2,10 @@
 
 @section('content')
   <div class="page-title-box">
-    <div class="row align-items-center">
-      <!-- Breadcrumbs-->
-      <div class="col-sm-6"><h4 class="page-title">Edit Blog</h4>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="/admin/blogs">Blog</a></li>
-          <li class="breadcrumb-item active">Edit Blog</li>
-        </ol>
-      </div>
-    </div>
+    @include('partials.admin.form.edit-breadcrumbs', ['featureName' => 'blog'])
 
     {!! Form::model($blog, ['url' => '/admin/blogs/'.$blog->id, 'method'=>'PATCH', 'files' => 'true']) !!}
-    @include('admin.blog.form', ['submitButtonText' => 'Update'])
+      @include('admin.blog.form', ['submitButtonText' => 'Update'])
     {!! Form::close() !!}
   </div>
 @endsection

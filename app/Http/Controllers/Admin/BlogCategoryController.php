@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
-use App\DigiMarketersHub\CustomHelper;
+use App\karigor\Helpers\CustomHelper;
 
 class BlogCategoryController extends Controller
 {
@@ -17,7 +17,7 @@ class BlogCategoryController extends Controller
     public function index()
     {
         $bcategories = BlogCategory::get();
-        return view('admin.blog-category.index', compact('bcategories'));
+        return view('admin.blog-categories.index', compact('bcategories'));
     }
 
     /**
@@ -27,7 +27,7 @@ class BlogCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.blog-category.create');
+        return view('admin.blog-categories.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class BlogCategoryController extends Controller
         $bcategory->slug = CustomHelper::generateSlug($bcategory->name, 'blog_categories');
         $bcategory->save();
 
-        return redirect(route('blog-category.index'))->with('success', 'Saved');
+        return redirect(route('blog-categories.index'))->with('success', 'Saved');
     }
 
     /**
@@ -65,7 +65,7 @@ class BlogCategoryController extends Controller
     public function edit($id)
     {
     	$bcategory = BlogCategory::findOrFail($id);
-        return view('admin.blog-category.edit' , compact('bcategory'));
+        return view('admin.blog-categories.edit' , compact('bcategory'));
     }
 
     /**
@@ -84,7 +84,7 @@ class BlogCategoryController extends Controller
                             : CustomHelper::generateSlug($bcategory->name, 'blog_categories');
         $bcategory->save();
 
-        return redirect(route('blog-category.index'))->with('success', 'Updated');
+        return redirect(route('blog-categories.index'))->with('success', 'Updated');
     }
 
     /**

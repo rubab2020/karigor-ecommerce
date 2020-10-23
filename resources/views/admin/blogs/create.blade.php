@@ -2,17 +2,7 @@
 
 @section('content')
 	<div class="page-title-box">
-		<div class="row align-items-center">
-			<!-- Breadcrumbs-->
-			<div class="col-sm-6">
-				<h4 class="page-title">Create Blog</h4>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
-					<li class="breadcrumb-item"><a href="/admin/blogs">Blogs</a></li>
-					<li class="breadcrumb-item active">Create Blog</li>
-				</ol>
-			</div>
-		</div>
+    @include('partials.admin.form.create-breadcrumbs', ['featureName' => 'blog'])
 
 		{!! Form::open(['url' => '/admin/blogs', 'files' => 'true']) !!}
 			@include('admin.blog.form', ['submitButtonText' => 'Save'])

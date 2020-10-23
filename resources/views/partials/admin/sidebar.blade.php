@@ -61,7 +61,7 @@
 					</a>
 					<ul class="submenu">
 						<li><a href="/admin/blogs">Blogs</a></li>
-						<li><a href="/admin/blog-category">Blog Category</a></li>
+						<li><a href="/admin/blog-categories">Blog Categories</a></li>
 					</ul>
 				</li>
 				<li>

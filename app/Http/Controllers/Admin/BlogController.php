@@ -18,7 +18,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::get();
-        return view('admin.blog.index', compact('blogs'));
+        return view('admin.blogs.index', compact('blogs'));
     }
 
     /**
@@ -29,7 +29,7 @@ class BlogController extends Controller
     public function create()
     {
         $bcategories = BlogCategory::pluck('name', 'id')->toArray();
-        return view('admin.blog.create', compact('bcategories'));
+        return view('admin.blogs.create', compact('bcategories'));
     }
 
     /**
@@ -90,7 +90,7 @@ class BlogController extends Controller
     {
         $bcategories = BlogCategory::pluck('name', 'id')->toArray();
     	$blog = Blog::findOrFail($id);
-        return view('admin.blog.edit' , compact('blog', 'bcategories'));
+        return view('admin.blogs.edit' , compact('blog', 'bcategories'));
     }
 
     /**

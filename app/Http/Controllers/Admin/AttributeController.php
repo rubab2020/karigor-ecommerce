@@ -16,7 +16,7 @@ class AttributeController extends Controller
     public function index()
     {
         $attributes = Attribute::get();
-        return view('admin.attribute.index', compact('attributes'));
+        return view('admin.attributes.index', compact('attributes'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view('admin.attribute.create');
+        return view('admin.attributes.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class AttributeController extends Controller
     {
         $attribute = Attribute::findOrFail($id);
 
-        return view('admin.attribute.edit' , compact('attribute'));
+        return view('admin.attributes.edit' , compact('attribute'));
     }
 
     /**

@@ -1,6 +1,8 @@
 <div class="left side-menu">
-	<div class="slimscroll-menu" id="remove-scroll"><!--- Sidemenu -->
-		<div id="sidebar-menu"><!-- Left Menu Start -->
+	<div class="slimscroll-menu" id="remove-scroll">
+		<!--- Sidemenu -->
+		<div id="sidebar-menu">
+			<!-- Left Menu Start -->
 			<ul class="metismenu" id="side-menu">
 				<li><a href="/admin/dashboard" class="waves-effect"><i class="ti-home"></i>
 						<!-- {{--<span class="badge badge-primary badge-pill float-right">2</span>--}} -->
@@ -38,10 +40,7 @@
 						<li><a href="/admin/attribute-options">Attribute Options</a></li>
 					</ul>
 				</li> -->
-				<li><a href="javascript:void(0);" class="waves-effect"><i
-								class="mdi mdi-settings m-r-5"></i><span> Products <span
-									class="float-right menu-arrow"><i
-										class="mdi mdi-chevron-right"></i></span></span></a>
+				<li><a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-settings m-r-5"></i><span> Products <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span></span></a>
 					<ul class="submenu">
 						<li><a href="/admin/products">All Products</a></li>
 						<li><a href="/admin/categories">Categories</a></li>
@@ -52,9 +51,8 @@
 				<li>
 					<a href="javascript:void(0);" class="waves-effect">
 						<i class="mdi mdi-pencil m-r-5"></i>
-						<span> Blogs  
-							<span
-								class="float-right menu-arrow">
+						<span> Blogs
+							<span class="float-right menu-arrow">
 								<i class="mdi mdi-chevron-right"></i>
 							</span>
 						</span>
@@ -63,6 +61,11 @@
 						<li><a href="/admin/blogs">Blogs</a></li>
 						<li><a href="/admin/blog-categories">Blog Categories</a></li>
 					</ul>
+				</li>
+				<li>
+					<a href="/admin/sliders" class="waves-effect">
+						<i class="mdi mdi-flag m-r-5"></i><span>Sliders</span>
+					</a>
 				</li>
 				<li>
 					<a href="/admin/settings/edit" class="waves-effect">

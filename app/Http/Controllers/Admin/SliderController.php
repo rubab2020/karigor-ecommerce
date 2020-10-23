@@ -70,7 +70,9 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $uplaodPath = $this->uploadPath;
+        $slider = Slider::findOrFail($id);
+        return view('admin.slider.edit', compact('slider', 'uplaodPath'));
     }
 
     /**
@@ -82,7 +84,25 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $slider = Slider::findOrFail($id);
+
+        $slider->link = $request->input('link');
+
+        if ($request->file('image')) {
+            // delete file
+            $fileName = public_path() . '/' . $this->uploadPath . $slider->image_bg;
+            if (file_exists($fileName)) \File::delete($fileName);
+            $fileName = public_path() . '/' . $this->uploadPath . $slider->image_sm;
+            if (file_exists($fileName)) \File::delete($fileName);
+            //uploading new images
+            $imageBgName = CustomHelper::saveImage($request->file('image'), $this->uploadPath, 600, 600);
+            $slider->image_bg = $imageBgName;
+            $imageSmName = CustomHelper::saveImage($request->file('image'), $this->uploadPath, 300, 300);
+            $slider->image_sm = $imageSmName;
+        }
+        $slider->save();
+
+        return redirect(route('sliders.index'))->with('success', 'Updated');
     }
 
     /**
@@ -93,6 +113,16 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $slider = Slider::findOrFail($id);
+
+        // delete file
+        $fileName = public_path() . '/' . $this->uploadPath . $slider->image_bg;
+        if (file_exists($fileName)) \File::delete($fileName);
+        $fileName = public_path() . '/' . $this->uploadPath . $slider->image_sm;
+        if (file_exists($fileName)) \File::delete($fileName);
+
+        $slider->delete();
+
+        return back()->with('success', 'Deleted');
     }
 }

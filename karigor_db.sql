@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2020 at 04:02 PM
+-- Generation Time: Oct 24, 2020 at 09:15 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.33
 
@@ -51,6 +51,48 @@ INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `p
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `attributes`
+--
+
+CREATE TABLE `attributes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attributes`
+--
+
+INSERT INTO `attributes` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'color', 'add different types of colors', '2020-10-23 10:37:10', '2020-10-23 10:37:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_options`
+--
+
+CREATE TABLE `attribute_options` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `attribute_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attribute_options`
+--
+
+INSERT INTO `attribute_options` (`id`, `attribute_id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 1, 'red', '2020-10-24 01:01:58', '2020-10-24 01:01:58');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `blogs`
 --
 
@@ -79,6 +121,41 @@ CREATE TABLE `blog_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blog_categories`
+--
+
+INSERT INTO `blog_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
+(1, 'jamdani history', 'jamdani-history', '2020-10-23 11:26:20', '2020-10-23 11:26:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `image_bg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image_sm` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `slug`, `parent_id`, `image_bg`, `image_sm`, `icon`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Sharee', 'sharee', NULL, '16033951665f91de5e92bdc.jpg', '16033951675f91de5f1cf42.jpg', '16033951675f91de5f85254.jpg', NULL, '2020-10-22 13:32:48', '2020-10-22 13:32:48'),
+(2, 'Deshi Sharee', 'deshi-sharee', 1, '16033964535f91e365a435d.jpg', '16033964535f91e365cb325.jpg', '16033964535f91e365e7edb.jpg', 'gorgeious saree', '2020-10-22 13:54:14', '2020-10-22 13:54:14'),
+(3, 'bedeshi sharee', 'bedeshi-sharee', 1, '16034654485f92f0e844dab.jpg', '16034654505f92f0ea0d7fa.jpg', '16034654505f92f0ea97ae2.jpg', 'lsklfksldflsdf', '2020-10-23 09:04:10', '2020-10-23 09:04:10');
 
 -- --------------------------------------------------------
 
@@ -136,7 +213,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2020_07_18_094855_create_blog_categories_table', 2),
 (7, '2020_07_19_122553_create_blogs_table', 2),
 (8, '2020_07_19_145009_create_settings_table', 2),
-(9, '2020_08_02_164928_create_contact_us_table', 2);
+(9, '2020_08_02_164928_create_contact_us_table', 2),
+(10, '2020_10_21_110433_create_categories_table', 3),
+(11, '2020_10_21_111107_create_tags_table', 3),
+(12, '2020_10_21_111128_create_attributes_table', 3),
+(13, '2020_10_21_111155_create_attribute_options_table', 4);
 
 -- --------------------------------------------------------
 
@@ -163,6 +244,28 @@ CREATE TABLE `settings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tags`
+--
+
+CREATE TABLE `tags` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `slug`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'trend', 'trend', 'all trending goes here', '2020-10-24 01:49:52', '2020-10-24 01:49:52');
 
 -- --------------------------------------------------------
 
@@ -196,8 +299,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `photo`, `phone`, `gender`, `dob`, `city`, `zipcode`, `country`, `address`, `provider`, `provider_id`, `is_active`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Imran', 'Hossain', 'rubab891@yahoo.com', NULL, '$2y$10$jjxBTMa2x1oG/T6BnnLR.O2OPXvKmTWxIkOxQM0uDckPNNSsZ7kUe', NULL, '01676104165', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '2020-10-11 07:55:25', '2020-10-11 07:55:25');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `photo`, `phone`, `gender`, `dob`, `city`, `zipcode`, `country`, `address`, `provider`, `provider_id`, `is_active`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'Hossain', 'rubab891@yahoo.com', NULL, '$2y$10$jjxBTMa2x1oG/T6BnnLR.O2OPXvKmTWxIkOxQM0uDckPNNSsZ7kUe', NULL, '01676104165', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, '2020-10-11 07:55:25', '2020-10-11 07:55:25');
 
 -- --------------------------------------------------------
 
@@ -252,6 +355,21 @@ ALTER TABLE `admins`
   ADD UNIQUE KEY `admins_email_unique` (`email`);
 
 --
+-- Indexes for table `attributes`
+--
+ALTER TABLE `attributes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `attributes_name_unique` (`name`);
+
+--
+-- Indexes for table `attribute_options`
+--
+ALTER TABLE `attribute_options`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `attribute_options_name_unique` (`name`),
+  ADD KEY `attribute_options_attribute_id_index` (`attribute_id`);
+
+--
 -- Indexes for table `blogs`
 --
 ALTER TABLE `blogs`
@@ -263,6 +381,14 @@ ALTER TABLE `blogs`
 --
 ALTER TABLE `blog_categories`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `categories_name_unique` (`name`),
+  ADD UNIQUE KEY `categories_slug_unique` (`slug`);
 
 --
 -- Indexes for table `contact_us`
@@ -295,6 +421,14 @@ ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tags_name_unique` (`name`),
+  ADD UNIQUE KEY `tags_slug_unique` (`slug`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -323,6 +457,18 @@ ALTER TABLE `admins`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `attributes`
+--
+ALTER TABLE `attributes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `attribute_options`
+--
+ALTER TABLE `attribute_options`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
@@ -332,7 +478,13 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT for table `blog_categories`
 --
 ALTER TABLE `blog_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `contact_us`
@@ -350,13 +502,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -373,6 +531,12 @@ ALTER TABLE `vendors`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `attribute_options`
+--
+ALTER TABLE `attribute_options`
+  ADD CONSTRAINT `attribute_options_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `blogs`

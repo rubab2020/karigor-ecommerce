@@ -38,14 +38,18 @@
 						<li><a href="/admin/attribute-options">Attribute Options</a></li>
 					</ul>
 				</li> -->
-				<li><a href="javascript:void(0);" class="waves-effect"><i
-								class="mdi mdi-settings m-r-5"></i><span> Products <span
-									class="float-right menu-arrow"><i
-										class="mdi mdi-chevron-right"></i></span></span></a>
+				<li>
+					<a href="javascript:void(0);" class="waves-effect">
+						<i class="mdi mdi-view-list m-r-5"></i>
+						<span> 
+							Products <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+						</span>
+					</a>
 					<ul class="submenu">
 						<li><a href="/admin/products">All Products</a></li>
 						<li><a href="/admin/categories">Categories</a></li>
 						<li><a href="/admin/attributes">Attributes</a></li>
+						<li><a href="/admin/attribute-options">Attribute Options</a></li>
 						<li><a href="/admin/tags">Tags</a></li>
 					</ul>
 				</li>
@@ -66,12 +70,13 @@
 				</li>
 				<li>
 					<a href="/admin/settings/edit" class="waves-effect">
-						<i class="mdi mdi-flag m-r-5"></i><span>Settings</span>
+						<i class="mdi mdi-settings m-r-5"></i><span>Settings</span>
 					</a>
 				</li>
 				<li>
 					<a href="/admin/contact-us/inbox" class="waves-effect">
-						<i class="mdi mdi-flag m-r-5"></i><span>Contact Us Inbox ({{ App\Models\ContactUs::count() }})</span>
+						<i class="mdi mdi-inbox m-r-5"></i>
+						<span>Contact Us Inbox ({{ App\Models\ContactUs::count() }})</span>
 					</a>
 				</li>
 			</ul>

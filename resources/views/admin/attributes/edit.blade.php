@@ -1,4 +1,5 @@
 @extends('layouts.admin-default')
+
 @section('content')
 	<div class="page-title-box">
 		@include('partials.admin.form.edit-breadcrumbs', ['featureName' => 'attribute'])

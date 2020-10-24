@@ -14,5 +14,11 @@
             width: auto;
             height: 40px;
         }
+
+        .table-custom{
+            border-collapse: collapse; 
+            border-spacing: 0; 
+            width: 100%;
+        }
     </style>
 @endsection

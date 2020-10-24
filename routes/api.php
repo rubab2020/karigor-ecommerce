@@ -20,14 +20,16 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group([
-    'middleware' => 'api',
-    'prefix' => 'auth',
-    'namespace' => 'Api\Auth'
-
+	'middleware' => 'api',
+	'namespace' => 'Api'
 ], function ($router) {
-    Route::post('login', 'AuthController@login');
-    Route::post('register', 'AuthController@register');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::get('user-profile', 'AuthController@userProfile');
+	// auth
+	Route::post('login', 'AuthController@login');
+	Route::post('register', 'AuthController@register');
+	Route::post('logout', 'AuthController@logout');
+	Route::post('refresh-token', 'AuthController@refreshToken');
+	Route::get('user-profile', 'AuthController@userProfile');
+
+	Route::get('categories', 'CategoryController@getCategories');
+
 });

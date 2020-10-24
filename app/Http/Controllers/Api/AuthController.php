@@ -97,7 +97,7 @@ class AuthController extends ApiController
         return $this->respond(['message' => 'User successfully signed out']);
     }
 
-    public function refresh() {
+    public function refreshToken() {
         return $this->createNewToken(auth('api')->refresh());
     }
 

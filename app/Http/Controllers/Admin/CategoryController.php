@@ -9,7 +9,12 @@ use App\Karigor\Helpers\CustomHelper;
 
 class CategoryController extends Controller
 {
-    private $uploadPath = 'uploads/categories/';
+    private $uploadPath;
+    
+    function __construct(){
+        $this->uploadPath = Category::getUploadPath();
+    }
+
     /**
      * Display a listing of the resource.
      *

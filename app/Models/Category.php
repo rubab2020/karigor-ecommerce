@@ -5,7 +5,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-		/**
+    private static $_uploadPath = 'uploads/categories/';
+
+	public function scopeParent($query, $parentId)
+	{
+		$query->where('parent_id', $parentId);
+	}
+
+	public static function getUploadPath()
+	{
+		return static::$_uploadPath;
+	}
+
+	/**
 	 * return category names
 	 *
 	 * @return array
@@ -51,5 +63,11 @@ class Category extends Model
 			}
 		}
 		return $names;
+	}
+
+	public static function getPhotoUrl($image)
+	{
+		$base = \URL::to('/');
+		return $base.'/'.static::$_uploadPath.$image;
 	}
 }

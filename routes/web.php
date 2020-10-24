@@ -45,6 +45,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('categories', 'Admin\CategoryController');
     Route::resource('attributes', 'Admin\AttributeController');
     Route::resource('attribute-options', 'Admin\AttributeOptionController');
+    Route::resource('tags', 'Admin\TagController');
 });
 
 

@@ -24,33 +24,42 @@ Auth::routes(['verify' => true]);
 
 // Admin routes
 Route::prefix('admin')->group(function(){
+    // auth
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/register', 'Auth\AdminRegisterController@showRegisterForm')->name('admin.register');
     Route::post('/register', 'Auth\AdminRegisterController@register')->name('admin.register.submit');
 
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
+    Route::resource('categories', 'Admin\CategoryController');
+    Route::resource('tags', 'Admin\TagController');  
 
-    Route::resource('blogs', 'Admin\BlogController');
-    Route::resource('blog-categories', 'Admin\BlogCategoryController');
+    // attributes
+    Route::resource('attributes', 'Admin\Attribute\AttributeController');
+    Route::resource('attribute-options', 'Admin\Attribute\AttributeOptionController');
 
+    // products
+    Route::resource('products', 'ProductController');
+
+    // blogs
+    Route::resource('blogs', 'Admin\Blog\BlogController');
+    Route::resource('blog-categories', 'Admin\Blog\BlogCategoryController');
+
+    // settings
     Route::get('settings/edit', 'Admin\SettingController@edit');
     Route::post('settings/update', 'Admin\SettingController@update');
 
+    // contact us
     Route::get('contact-us/inbox', function(){
         $inboxes = App\Models\ContactUs::all();
         return view('admin.contactus-inbox', compact('inboxes'));
     });
-
-    Route::resource('categories', 'Admin\CategoryController');
-    Route::resource('attributes', 'Admin\AttributeController');
-    Route::resource('attribute-options', 'Admin\AttributeOptionController');
-    Route::resource('tags', 'Admin\TagController');
 });
 
 
 // Vendor routes
 Route::prefix('vendor')->group(function(){
+    // auth
     Route::get('/login', 'Auth\VendorLoginController@showLoginForm')->name('vendor.login');
     Route::post('/login', 'Auth\VendorLoginController@login')->name('vendor.login.submit');
     Route::get('/register', 'Auth\VendorRegisterController@showRegisterForm')->name('vendor.register');

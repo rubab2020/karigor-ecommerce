@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Attribute;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\BlogCategory;
-use App\karigor\Helpers\CustomHelper;
+use App\Models\Attribute;
 
-class BlogCategoryController extends Controller
+class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class BlogCategoryController extends Controller
      */
     public function index()
     {
-        $bcategories = BlogCategory::get();
-        return view('admin.blog-categories.index', compact('bcategories'));
+        $attributes = Attribute::get();
+        return view('admin.attributes.index', compact('attributes'));
     }
 
     /**
@@ -27,7 +26,7 @@ class BlogCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.blog-categories.create');
+        return view('admin.attributes.create');
     }
 
     /**
@@ -36,13 +35,14 @@ class BlogCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, BlogCategory $bcategory)
+    public function store(Request $request)
     {
-        $bcategory->name = $request->input('name');
-        $bcategory->slug = CustomHelper::generateSlug($bcategory->name, 'blog_categories');
-        $bcategory->save();
+        $attribute = new Attribute;
+        $attribute->name = $request->input('name');
+        $attribute->description = $request->input('description');
+        $attribute->save();
 
-        return redirect(route('blog-categories.index'))->with('success', 'Saved');
+        return redirect(route('attributes.index'))->with('success', 'Saved');
     }
 
     /**
@@ -64,8 +64,9 @@ class BlogCategoryController extends Controller
      */
     public function edit($id)
     {
-    	$bcategory = BlogCategory::findOrFail($id);
-        return view('admin.blog-categories.edit' , compact('bcategory'));
+        $attribute = Attribute::findOrFail($id);
+
+        return view('admin.attributes.edit' , compact('attribute'));
     }
 
     /**
@@ -77,14 +78,12 @@ class BlogCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-    	$bcategory = BlogCategory::findOrFail($id);
-        $bcategory->name = $request->input('name');
-        $bcategory->slug = ($bcategory->name == $bcategory->name) 
-                            ? $bcategory->slug
-                            : CustomHelper::generateSlug($bcategory->name, 'blog_categories');
-        $bcategory->save();
+        $attribute = Attribute::findOrFail($id);
+        $attribute->name = $request->input('name');
+        $attribute->description = $request->input('description');
+        $attribute->save();
 
-        return redirect(route('blog-categories.index'))->with('success', 'Updated');
+        return redirect(route('attributes.index'))->with('success', 'Updated');
     }
 
     /**
@@ -95,8 +94,8 @@ class BlogCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $bcategory = BlogCategory::findOrFail($id);
-        $bcategory->delete();
+        $attribute = Attribute::findOrFail($id);
+        $attribute->delete();
 
         return back()->with('success', 'Deleted');
     }

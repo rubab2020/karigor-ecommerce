@@ -1,0 +1,11 @@
+@extends('layouts.admin-default')
+
+@section('content')
+    <div class="page-title-box">
+        @include('partials.admin.form.edit-breadcrumbs', ['featureName' => 'attribute-option'])
+
+        {!! Form::model($option, ['url' => '/admin/attribute-options/'.$option->id, 'method'=>'PATCH', 'files'=>true]) !!}
+            @include('admin.attribute-options.form', ['submitButtonText' => 'Update'])
+        {!! Form::close() !!}
+    </div>
+@endsection

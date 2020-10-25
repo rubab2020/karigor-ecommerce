@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Users\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class VendorController extends Controller
+class DashboardController extends Controller
 {
     public function __construct()
     {

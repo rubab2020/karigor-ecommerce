@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Attribute;
+use App\Models\Tag;
 
-class AttributeController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        $attributes = Attribute::get();
-        return view('admin.attributes.index', compact('attributes'));
+        $tags = Tag::get();
+        return view('admin.tags.index', compact('tags'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view('admin.attributes.create');
+        return view('admin.tags.create');
     }
 
     /**
@@ -37,12 +37,13 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
-        $attribute = new Attribute;
-        $attribute->name = $request->input('name');
-        $attribute->description = $request->input('description');
-        $attribute->save();
+        $tag = new Tag;
+        $tag->name = $request->input('name');
+        $tag->slug = \Str::slug($request->input('name'), '-');
+        $tag->description = $request->input('description');
+        $tag->save();
 
-        return redirect(route('attributes.index'))->with('success', 'Saved');
+        return redirect(route('tags.index'))->with('success', 'Saved');
     }
 
     /**
@@ -64,9 +65,9 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        $attribute = Attribute::findOrFail($id);
+        $tag = Tag::findOrFail($id);
 
-        return view('admin.attributes.edit' , compact('attribute'));
+        return view('admin.tags.edit' , compact('attribute'));
     }
 
     /**
@@ -78,12 +79,13 @@ class AttributeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $attribute = Attribute::findOrFail($id);
-        $attribute->name = $request->input('name');
-        $attribute->description = $request->input('description');
-        $attribute->save();
+        $tag = Tag::findOrFail($id);
+        $tag->name = $request->input('name');
+        $tag->slug = \Str::slug($request->input('name'), '-');
+        $tag->description = $request->input('description');
+        $tag->save();
 
-        return redirect(route('attributes.index'))->with('success', 'Updated');
+        return redirect(route('tags.index'))->with('success', 'Updated');
     }
 
     /**
@@ -94,8 +96,8 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
-        $attribute = Attribute::findOrFail($id);
-        $attribute->delete();
+        $tag = Tag::findOrFail($id);
+        $tag->delete();
 
         return back()->with('success', 'Deleted');
     }

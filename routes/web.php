@@ -29,10 +29,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/register', 'Auth\AdminRegisterController@showRegisterForm')->name('admin.register');
     Route::post('/register', 'Auth\AdminRegisterController@register')->name('admin.register.submit');
 
-    Route::get('/dashboard', 'Admin\AdminController@index')->name('admin.dashboard');
+    Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
 
     Route::resource('blogs', 'Admin\BlogController');
-    Route::resource('blog-category', 'Admin\BlogCategoryController');
+    Route::resource('blog-categories', 'Admin\BlogCategoryController');
 
     // routes for slider
     Route::resource('sliders', 'Admin\SliderController');
@@ -47,6 +47,8 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('categories', 'Admin\CategoryController');
     Route::resource('attributes', 'Admin\AttributeController');
+    Route::resource('attribute-options', 'Admin\AttributeOptionController');
+    Route::resource('tags', 'Admin\TagController');
 });
 
 
@@ -57,7 +59,7 @@ Route::prefix('vendor')->group(function () {
     Route::get('/register', 'Auth\VendorRegisterController@showRegisterForm')->name('vendor.register');
     Route::post('/register', 'Auth\VendorRegisterController@register')->name('vendor.register.submit');
 
-    Route::get('/dashboard', 'Vendor\VendorController@index')->name('vendor.dashboard');
+    Route::get('/dashboard', 'Vendor\DashboardController@index')->name('vendor.dashboard');
 });
 
 Route::post('editor-image-upload', 'CKEditorController@uploadEditorImage')->name('editor-image-upload');

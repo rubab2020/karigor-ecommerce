@@ -1,7 +1,4 @@
 <div class="row mt-4">
-  <!-- <div class="col-lg-2">
-  </div> -->
-
   <div class="col-lg-10">
     <div class="card">
       <div class="card-body">
@@ -67,7 +64,5 @@
 
       </div>
     </div>
-  </div><!-- end col -->
-  <div class="col-lg-1">
   </div>
 </div>

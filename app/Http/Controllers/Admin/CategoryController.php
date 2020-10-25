@@ -19,7 +19,7 @@ class CategoryController extends Controller
     {
         $uplaodPath = $this->uploadPath;
         $categories = Category::get();
-        return view('admin.category.index', compact('categories', 'uplaodPath'));
+        return view('admin.categories.index', compact('categories', 'uplaodPath'));
     }
 
     /**
@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::names();
-        return view('admin.category.create', compact('categories'));
+        return view('admin.categories.create', compact('categories'));
     }
 
     /**
@@ -80,7 +80,7 @@ class CategoryController extends Controller
     	$category = Category::findOrFail($id);
         $categories = Category::names();
 
-        return view('admin.category.edit' , compact('category', 'categories', 'uplaodPath'));
+        return view('admin.categories.edit' , compact('category', 'categories', 'uplaodPath'));
     }
 
     /**

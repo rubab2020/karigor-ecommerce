@@ -1,5 +1,4 @@
 <div class="row mt-4">
-  <div class="col-lg-1"></div>
   <div class="col-lg-10">
     <div class="card">
       <div class="card-body">
@@ -47,5 +46,4 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-1"></div>
 </div>

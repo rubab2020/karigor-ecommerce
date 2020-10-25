@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
+use App\Models\AttributeOption;
 
-class AttributeController extends Controller
+class AttributeOptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,9 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        $attributes = Attribute::get();
-        return view('admin.attributes.index', compact('attributes'));
+        $options = AttributeOption::get();
+        
+        return view('admin.attribute-options.index', compact('options'));
     }
 
     /**
@@ -26,7 +28,8 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view('admin.attributes.create');
+        $attributes = Attribute::pluck('name', 'id')->toArray();
+        return view('admin.attribute-options.create', compact('attributes'));
     }
 
     /**
@@ -37,12 +40,12 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
-        $attribute = new Attribute;
-        $attribute->name = $request->input('name');
-        $attribute->description = $request->input('description');
-        $attribute->save();
+        $option = new AttributeOption;
+        $option->attribute_id = $request->input('attribute_id');
+        $option->name = $request->input('name');
+        $option->save();
 
-        return redirect(route('attributes.index'))->with('success', 'Saved');
+        return redirect(route('attribute-options.index'))->with('success', 'Saved');
     }
 
     /**
@@ -64,9 +67,11 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        $attribute = Attribute::findOrFail($id);
+        $option = AttributeOption::findOrFail($id);
 
-        return view('admin.attributes.edit' , compact('attribute'));
+        $attributes = Attribute::pluck('name', 'id')->toArray();
+
+        return view('admin.attribute-options.edit' , compact('option', 'attributes'));
     }
 
     /**
@@ -78,12 +83,12 @@ class AttributeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $attribute = Attribute::findOrFail($id);
-        $attribute->name = $request->input('name');
-        $attribute->description = $request->input('description');
-        $attribute->save();
+        $option = AttributeOption::findOrFail($id);
+        $option->name = $request->input('name');
+        $option->attribute_id = $request->input('attribute_id');
+        $option->save();
 
-        return redirect(route('attributes.index'))->with('success', 'Updated');
+        return redirect(route('attribute-options.index'))->with('success', 'Updated');
     }
 
     /**
@@ -94,8 +99,8 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
-        $attribute = Attribute::findOrFail($id);
-        $attribute->delete();
+        $option = AttributeOption::findOrFail($id);
+        $option->delete();
 
         return back()->with('success', 'Deleted');
     }

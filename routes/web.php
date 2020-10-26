@@ -39,7 +39,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('attribute-options', 'Admin\Attribute\AttributeOptionController');
 
     // products
-    Route::resource('products', 'ProductController');
+    Route::resource('products', 'Admin\Product\ProductController');
 
     // blogs
     Route::resource('blogs', 'Admin\Blog\BlogController');

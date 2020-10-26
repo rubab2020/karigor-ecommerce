@@ -28,7 +28,7 @@
 
 							<nav>
 							  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-							    <a class="nav-item nav-link active" id="nav-static-pages-tab" data-toggle="tab" href="#static-pages" role="tab" aria-controls="static-pages" aria-selected="true">static pages</a>
+							    <a class="nav-item nav-link active" id="nav-static-pages-tab" data-toggle="tab" href="#static-pages" role="tab" aria-controls="static-pages" aria-selected="true">pages</a>
 							    <a class="nav-item nav-link" id="analytics-tab" data-toggle="tab" href="#analytics" role="tab" aria-controls="analytics" aria-selected="false">analytics</a>
 							  </div>
 							</nav>

@@ -45,4 +45,9 @@ class Vendor extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public static function getVendorName($vid) {
+        return self::where('id', $vid)->value('name');
+    }
 }

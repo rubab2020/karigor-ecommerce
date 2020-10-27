@@ -5,7 +5,7 @@
     @include('partials.admin.form.create-breadcrumbs', ['featureName' => 'blog'])
 
 		{!! Form::open(['url' => '/admin/blogs', 'files' => 'true']) !!}
-			@include('admin.blog.form', ['submitButtonText' => 'Save'])
+			@include('admin.blogs.form', ['submitButtonText' => 'Save'])
 		{!! Form::close() !!}
 	</div>
 @endsection

@@ -87,7 +87,7 @@
 @endsection
 
 @section('scripts')
-	<!-- {{--for ck editor--}} -->
+  <!-- ck editor -->
 	<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 	<script>
 		CKEDITOR.replace( 'editorAboutUs', {

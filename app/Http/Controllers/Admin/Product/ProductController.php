@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 // use App\Models\ProductImage;
 // use App\Models\ProductAttribute;
-use App\Vendor;
-// use App\Models\Category;
+use App\Models\Vendor;
+use App\Models\Category;
 // use App\Karigor\CustomHelper;
 
 class ProductController extends Controller
@@ -32,9 +32,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $merchants = Vendor::pluck('name', 'id')->toArray();
+        $Vendors = Vendor::pluck('name', 'id')->toArray();
 
-        $categories = Category::parentCategories();
-        return view('admin.products.create', compact('categories', 'merchants'));
+        // $categories = Category::parentCategories();
+        return view('admin.products.create', compact('Vendors'));
     }		
 }

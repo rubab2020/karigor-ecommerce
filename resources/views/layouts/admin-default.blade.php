@@ -12,17 +12,13 @@
 
     @yield('header')
 
-    <link 
-      href="{{asset('admin/css/bootstrap.min.css')}}" 
-      rel="stylesheet" 
-      type="text/css">
-    <link 
-      href="{{asset('admin/css/metismenu.min.css')}}" 
-      rel="stylesheet" 
-      type="text/css">
+    <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('admin/css/metismenu.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('admin/css/icons.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('admin/css/style.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css">
 
+    <!-- custom -->
     <style type="text/css">
       .required, .error {
         color: red;
@@ -122,9 +118,10 @@
       <script src="{{asset('admin/js/waves.min.js')}}"></script>
       <script src="{{asset('admin/js/app.js')}}"></script>
       <script src="{{asset('admin/js/bootstrap-notify.js')}}"></script>
-      <!-- static pages -->
+      <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
+      
+      <!-- custom -->
       <script src="{{asset('admin/js/admin.js')}}"></script>
-      <script src="{{asset('admin/js/script.js')}}"></script>
   
       @yield('scripts')
 

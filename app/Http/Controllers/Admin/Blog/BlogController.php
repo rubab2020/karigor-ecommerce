@@ -43,22 +43,22 @@ class BlogController extends Controller
         // saving image in the directory
         $coverPhoto = $request->file('cover_photo');
         $imageLink = '';
-        if($coverPhoto){
+        if ($coverPhoto) {
             $path = 'images/uploads/blogs/';
-            $fileName = time(). '-' .$coverPhoto->getClientOriginalName();
-            $imageLink = $path.$fileName;
+            $fileName = time() . '-' . $coverPhoto->getClientOriginalName();
+            $imageLink = $path . $fileName;
             // $img = \Image::make(base64_decode($coverPhoto))
             // ->resize(null, 460, function ($constraint) {
             //     $constraint->aspectRatio();
             // })
             // ->save($imageLink);
-             \Image::make($coverPhoto->getRealPath())->resize(null, 460, function($constraint){
+            \Image::make($coverPhoto->getRealPath())->resize(null, 460, function ($constraint) {
                 $constraint->aspectRatio();
             })
-            ->save($imageLink, 70); // quality medium
+                ->save($imageLink, 70); // quality medium
         }
 
-        $blog->category_id = $request->input('category_id'); 
+        $blog->category_id = $request->input('category_id');
         $blog->slug = CustomHelper::generateSlug($request->input('title'), 'blogs');
         $blog->title = $request->input('title');
         $blog->cover_photo = $imageLink;
@@ -89,8 +89,8 @@ class BlogController extends Controller
     public function edit($id)
     {
         $bcategories = BlogCategory::pluck('name', 'id')->toArray();
-    	$blog = Blog::findOrFail($id);
-        return view('admin.blogs.edit' , compact('blog', 'bcategories'));
+        $blog = Blog::findOrFail($id);
+        return view('admin.blogs.edit', compact('blog', 'bcategories'));
     }
 
     /**
@@ -105,28 +105,28 @@ class BlogController extends Controller
         // saving image in the directory
         $coverPhoto = $request->file('cover_photo');
         $imageLink = '';
-        if($coverPhoto){
+        if ($coverPhoto) {
             $path = 'images/uploads/blogs/';
-            $fileName = time(). '-' .$coverPhoto->getClientOriginalName();
-            $imageLink = $path.$fileName;
+            $fileName = time() . '-' . $coverPhoto->getClientOriginalName();
+            $imageLink = $path . $fileName;
             // $img = \Image::make(base64_decode($coverPhotode))
             // ->resize(null, 460, function ($constraint) {
             //     $constraint->aspectRatio();
             // })
             // ->save($imageLink);
-            \Image::make($coverPhoto->getRealPath())->resize(null, 460, function($constraint){
+            \Image::make($coverPhoto->getRealPath())->resize(null, 460, function ($constraint) {
                 $constraint->aspectRatio();
             })
-            ->save($imageLink, 70); // quality medium
+                ->save($imageLink, 70); // quality medium
         }
 
-    	$blog = Blog::findOrFail($id);
-        $blog->category_id = $request->input('category_id'); 
-        $blog->slug = ($blog->title == $request->input('title')) 
-                            ? $blog->slug 
-                            : CustomHelper::generateSlug($blog->title, 'blogs');
+        $blog = Blog::findOrFail($id);
+        $blog->category_id = $request->input('category_id');
+        $blog->slug = ($blog->title == $request->input('title'))
+            ? $blog->slug
+            : CustomHelper::generateSlug($blog->title, 'blogs');
         $blog->title = $request->input('title');
-        if($coverPhoto){
+        if ($coverPhoto) {
             $blog->cover_photo = $imageLink;
         }
         $blog->description = $request->input('description');
@@ -147,8 +147,8 @@ class BlogController extends Controller
         $blog = Blog::findOrFail($id);
 
         // delete file
-        $fileName = public_path().'/'.$blog->cover_photo;
-        if(file_exists($fileName))  \File::delete($fileName);
+        $fileName = public_path() . '/' . $blog->cover_photo;
+        if (file_exists($fileName))  \File::delete($fileName);
 
         $blog->delete();
 

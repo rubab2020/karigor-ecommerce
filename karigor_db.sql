@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2020 at 09:15 PM
+-- Generation Time: Oct 27, 2020 at 08:26 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.33
 
@@ -101,12 +101,19 @@ CREATE TABLE `blogs` (
   `category_id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cover_photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cover_photo_bg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cover_photo_sm` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `msngr_btn_upper_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `category_id`, `title`, `slug`, `cover_photo_bg`, `cover_photo_sm`, `description`, `created_at`, `updated_at`) VALUES
+(1, 1, 'test blog', 'test-blog', '16038248285f986cbc6a8ea.png', '16038248285f986cbcf39cd.png', '<p><img alt=\"\" src=\"http://localhost:8000/images/uploads/ckeditor/Screenshot (302)_1603824592.png\" style=\"height:768px; width:1366px\" /></p>', '2020-10-27 12:52:40', '2020-10-27 12:53:49');
 
 -- --------------------------------------------------------
 
@@ -217,7 +224,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2020_10_21_110433_create_categories_table', 3),
 (11, '2020_10_21_111107_create_tags_table', 3),
 (12, '2020_10_21_111128_create_attributes_table', 3),
-(13, '2020_10_21_111155_create_attribute_options_table', 4);
+(13, '2020_10_21_111155_create_attribute_options_table', 4),
+(14, '2020_10_26_130157_create_products_table', 5);
 
 -- --------------------------------------------------------
 
@@ -234,6 +242,32 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `vendor_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price_regular` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price_sale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price_start_date` timestamp NULL DEFAULT NULL,
+  `price_end_date` timestamp NULL DEFAULT NULL,
+  `sku` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stock_quantity` int(11) NOT NULL,
+  `low_stock_quantity_limit` int(11) DEFAULT NULL,
+  `shipping_weight` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purchase_note` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `settings`
 --
 
@@ -244,6 +278,18 @@ CREATE TABLE `settings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `name`, `content`, `created_at`, `updated_at`) VALUES
+(1, 'about_us', '<p>dlfldg</p>', '2020-10-27 13:14:11', '2020-10-27 13:14:11'),
+(2, 'term_and_conditions', '<p>krk</p>', '2020-10-27 13:14:11', '2020-10-27 13:14:11'),
+(3, 'privacy_policy', '<p>o43o4</p>', '2020-10-27 13:14:11', '2020-10-27 13:14:11'),
+(4, 'faq', '<p>klsdls</p>', '2020-10-27 13:14:11', '2020-10-27 13:14:11'),
+(5, 'fb_pixel_code', 'kdfldlfldlf', '2020-10-27 13:14:11', '2020-10-27 13:14:11'),
+(6, 'google_analytics', '23o2o3', '2020-10-27 13:14:11', '2020-10-27 13:14:11');
 
 -- --------------------------------------------------------
 
@@ -344,6 +390,13 @@ CREATE TABLE `vendors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `vendors`
+--
+
+INSERT INTO `vendors` (`id`, `name`, `email`, `email_verified_at`, `password`, `photo`, `phone`, `shop_name`, `shop_slug`, `brand_logo`, `brand_banner`, `brand_page_link`, `gender`, `dob`, `street_1`, `street_2`, `city`, `zipcode`, `country`, `banking_type`, `account_name`, `account_number`, `bank_name`, `branch_name`, `commission_percent`, `provider`, `provider_id`, `is_featured`, `is_active`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'vendor rubab', 'rubab891@yahoo.com', NULL, '$2y$10$LaTxm1Y/d.Mfgm.Xm/KmkOOtQuKevz2sCpnGb/OEb8AGKX2aJJATm', NULL, NULL, 'Rubab 10x', 'rubab-10x', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -415,6 +468,14 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `products_slug_unique` (`slug`),
+  ADD KEY `products_vendor_id_index` (`vendor_id`);
+
+--
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
@@ -472,7 +533,7 @@ ALTER TABLE `attribute_options`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `blog_categories`
@@ -502,13 +563,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tags`
@@ -526,7 +593,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -543,6 +610,12 @@ ALTER TABLE `attribute_options`
 --
 ALTER TABLE `blogs`
   ADD CONSTRAINT `blogs_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `blog_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_vendor_id_foreign` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -119,6 +119,7 @@
       <script src="{{asset('admin/js/app.js')}}"></script>
       <script src="{{asset('admin/js/bootstrap-notify.js')}}"></script>
       <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
+      <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
       
       <!-- custom -->
       <script src="{{asset('admin/js/admin.js')}}"></script>

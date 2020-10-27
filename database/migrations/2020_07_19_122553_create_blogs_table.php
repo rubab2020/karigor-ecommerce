@@ -19,9 +19,9 @@ class CreateBlogsTable extends Migration
             $table->foreign('category_id')->references('id')->on('blog_categories')->onDelete('cascade');
             $table->string('title');
             $table->string('slug');
-            $table->string('cover_photo');
+            $table->string('cover_photo_bg');
+            $table->string('cover_photo_sm');
             $table->longText('description');
-            $table->string('msngr_btn_upper_text');
             $table->timestamps();
         });
     }

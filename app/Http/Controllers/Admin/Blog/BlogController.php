@@ -6,10 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\DigiMarketersHub\CustomHelper;
+use App\Karigor\Helpers\CustomHelper;
 
 class BlogController extends Controller
 {
+    private $uploadPath;
+    
+    function __construct(){
+        $this->uploadPath = Blog::getUploadPath();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +24,9 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::get();
-        return view('admin.blogs.index', compact('blogs'));
+        $uplaodPath = $this->uploadPath;
+        
+        return view('admin.blogs.index', compact('blogs', 'uplaodPath'));
     }
 
     /**
@@ -40,30 +48,15 @@ class BlogController extends Controller
      */
     public function store(Request $request, Blog $blog)
     {
-        // saving image in the directory
-        $coverPhoto = $request->file('cover_photo');
-        $imageLink = '';
-        if($coverPhoto){
-            $path = 'images/uploads/blogs/';
-            $fileName = time(). '-' .$coverPhoto->getClientOriginalName();
-            $imageLink = $path.$fileName;
-            // $img = \Image::make(base64_decode($coverPhoto))
-            // ->resize(null, 460, function ($constraint) {
-            //     $constraint->aspectRatio();
-            // })
-            // ->save($imageLink);
-             \Image::make($coverPhoto->getRealPath())->resize(null, 460, function($constraint){
-                $constraint->aspectRatio();
-            })
-            ->save($imageLink, 70); // quality medium
-        }
+        $imageBgName = CustomHelper::saveImage($request->file('cover_photo'), $this->uploadPath, 460, 460);
+        $imageSmName = CustomHelper::saveImage($request->file('cover_photo'), $this->uploadPath, 230, 230);
 
         $blog->category_id = $request->input('category_id'); 
         $blog->slug = CustomHelper::generateSlug($request->input('title'), 'blogs');
         $blog->title = $request->input('title');
-        $blog->cover_photo = $imageLink;
+        $blog->cover_photo_bg = $imageBgName;
+        $blog->cover_photo_sm = $imageSmName;
         $blog->description = $request->input('description');
-        $blog->msngr_btn_upper_text = $request->input('msngr_btn_upper_text');
         $blog->save();
 
         return redirect(route('blogs.index'))->with('success', 'Saved');
@@ -90,7 +83,9 @@ class BlogController extends Controller
     {
         $bcategories = BlogCategory::pluck('name', 'id')->toArray();
     	$blog = Blog::findOrFail($id);
-        return view('admin.blogs.edit' , compact('blog', 'bcategories'));
+        $uplaodPath = $this->uploadPath;
+
+        return view('admin.blogs.edit' , compact('blog', 'bcategories', 'uplaodPath'));
     }
 
     /**
@@ -102,23 +97,6 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // saving image in the directory
-        $coverPhoto = $request->file('cover_photo');
-        $imageLink = '';
-        if($coverPhoto){
-            $path = 'images/uploads/blogs/';
-            $fileName = time(). '-' .$coverPhoto->getClientOriginalName();
-            $imageLink = $path.$fileName;
-            // $img = \Image::make(base64_decode($coverPhotode))
-            // ->resize(null, 460, function ($constraint) {
-            //     $constraint->aspectRatio();
-            // })
-            // ->save($imageLink);
-            \Image::make($coverPhoto->getRealPath())->resize(null, 460, function($constraint){
-                $constraint->aspectRatio();
-            })
-            ->save($imageLink, 70); // quality medium
-        }
 
     	$blog = Blog::findOrFail($id);
         $blog->category_id = $request->input('category_id'); 
@@ -126,11 +104,13 @@ class BlogController extends Controller
                             ? $blog->slug 
                             : CustomHelper::generateSlug($blog->title, 'blogs');
         $blog->title = $request->input('title');
-        if($coverPhoto){
-            $blog->cover_photo = $imageLink;
+        if($request->file('cover_photo')){
+            $imageBgName = CustomHelper::saveImage($request->file('cover_photo'), $this->uploadPath, 460, 460);
+            $imageSmName = CustomHelper::saveImage($request->file('cover_photo'), $this->uploadPath, 230, 230);
+            $blog->cover_photo_bg = $imageBgName;
+            $blog->cover_photo_sm = $imageSmName;
         }
         $blog->description = $request->input('description');
-        $blog->msngr_btn_upper_text = $request->input('msngr_btn_upper_text');
         $blog->save();
 
         return redirect(route('blogs.index'))->with('success', 'Updated');
@@ -147,7 +127,9 @@ class BlogController extends Controller
         $blog = Blog::findOrFail($id);
 
         // delete file
-        $fileName = public_path().'/'.$blog->cover_photo;
+        $fileName = public_path().'/'.$blog->cover_photo_bg;
+        if(file_exists($fileName))  \File::delete($fileName);
+        $fileName = public_path().'/'.$blog->cover_photo_sm;
         if(file_exists($fileName))  \File::delete($fileName);
 
         $blog->delete();

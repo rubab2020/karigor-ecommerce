@@ -32,4 +32,5 @@ Route::group([
 
 	Route::get('categories', 'CategoryController@getCategories');
 	Route::get('sliders', 'SliderController@getSliders');
+	Route::get('blogCategories', 'Blog\BlogCategoryController@getBlogCategories');
 });

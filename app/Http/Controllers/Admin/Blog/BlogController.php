@@ -11,8 +11,9 @@ use App\Karigor\Helpers\CustomHelper;
 class BlogController extends Controller
 {
     private $uploadPath;
-    
-    function __construct(){
+
+    function __construct()
+    {
         $this->uploadPath = Blog::getUploadPath();
     }
 
@@ -25,7 +26,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::get();
         $uplaodPath = $this->uploadPath;
-        
+
         return view('admin.blogs.index', compact('blogs', 'uplaodPath'));
     }
 
@@ -51,7 +52,7 @@ class BlogController extends Controller
         $imageBgName = CustomHelper::saveImage($request->file('cover_photo'), $this->uploadPath, 460, 460);
         $imageSmName = CustomHelper::saveImage($request->file('cover_photo'), $this->uploadPath, 230, 230);
 
-        $blog->category_id = $request->input('category_id'); 
+        $blog->category_id = $request->input('category_id');
         $blog->slug = CustomHelper::generateSlug($request->input('title'), 'blogs');
         $blog->title = $request->input('title');
         $blog->cover_photo_bg = $imageBgName;
@@ -82,10 +83,10 @@ class BlogController extends Controller
     public function edit($id)
     {
         $bcategories = BlogCategory::pluck('name', 'id')->toArray();
-    	$blog = Blog::findOrFail($id);
+        $blog = Blog::findOrFail($id);
         $uplaodPath = $this->uploadPath;
 
-        return view('admin.blogs.edit' , compact('blog', 'bcategories', 'uplaodPath'));
+        return view('admin.blogs.edit', compact('blog', 'bcategories', 'uplaodPath'));
     }
 
     /**
@@ -98,13 +99,13 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
 
-    	$blog = Blog::findOrFail($id);
-        $blog->category_id = $request->input('category_id'); 
-        $blog->slug = ($blog->title == $request->input('title')) 
-                            ? $blog->slug 
-                            : CustomHelper::generateSlug($blog->title, 'blogs');
+        $blog = Blog::findOrFail($id);
+        $blog->category_id = $request->input('category_id');
+        $blog->slug = ($blog->title == $request->input('title'))
+            ? $blog->slug
+            : CustomHelper::generateSlug($blog->title, 'blogs');
         $blog->title = $request->input('title');
-        if($request->file('cover_photo')){
+        if ($request->file('cover_photo')) {
             $imageBgName = CustomHelper::saveImage($request->file('cover_photo'), $this->uploadPath, 460, 460);
             $imageSmName = CustomHelper::saveImage($request->file('cover_photo'), $this->uploadPath, 230, 230);
             $blog->cover_photo_bg = $imageBgName;
@@ -127,10 +128,10 @@ class BlogController extends Controller
         $blog = Blog::findOrFail($id);
 
         // delete file
-        $fileName = public_path().'/'.$blog->cover_photo_bg;
-        if(file_exists($fileName))  \File::delete($fileName);
-        $fileName = public_path().'/'.$blog->cover_photo_sm;
-        if(file_exists($fileName))  \File::delete($fileName);
+        $fileName = public_path() . '/' . $blog->cover_photo_bg;
+        if (file_exists($fileName))  \File::delete($fileName);
+        $fileName = public_path() . '/' . $blog->cover_photo_sm;
+        if (file_exists($fileName))  \File::delete($fileName);
 
         $blog->delete();
 

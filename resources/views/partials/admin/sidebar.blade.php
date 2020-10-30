@@ -1,6 +1,8 @@
 <div class="left side-menu">
-	<div class="slimscroll-menu" id="remove-scroll"><!--- Sidemenu -->
-		<div id="sidebar-menu"><!-- Left Menu Start -->
+	<div class="slimscroll-menu" id="remove-scroll">
+		<!--- Sidemenu -->
+		<div id="sidebar-menu">
+			<!-- Left Menu Start -->
 			<ul class="metismenu" id="side-menu">
 				<li>
 					<a href="/admin/dashboard" class="waves-effect">
@@ -10,7 +12,7 @@
 				<li>
 					<a href="javascript:void(0);" class="waves-effect">
 						<i class="mdi mdi-view-list m-r-5"></i>
-						<span> 
+						<span>
 							Products <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
 						</span>
 					</a>
@@ -25,8 +27,8 @@
 				<li>
 					<a href="javascript:void(0);" class="waves-effect">
 						<i class="mdi mdi-pencil m-r-5"></i>
-						<span> 
-							Blogs  
+						<span>
+							Blogs
 							<span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
 						</span>
 					</a>
@@ -34,6 +36,16 @@
 						<li><a href="/admin/blogs">Blogs</a></li>
 						<li><a href="/admin/blog-categories">Blog Categories</a></li>
 					</ul>
+				</li>
+				<li>
+					<a href="/admin/sliders" class="waves-effect">
+						<i class="mdi mdi-flag m-r-5"></i><span>Sliders</span>
+					</a>
+				</li>
+				<li>
+					<a href="/admin/vendors" class="waves-effect">
+						<i class="mdi mdi-flag m-r-5"></i><span>Vendors</span>
+					</a>
 				</li>
 				<li>
 					<a href="/admin/settings/edit" class="waves-effect">

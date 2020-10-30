@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    private static $_uploadPath = 'images/uploads/categories/';
+	private static $_uploadPath = 'images/uploads/categories/';
 
 	public function scopeParent($query, $parentId)
 	{
@@ -25,23 +26,23 @@ class Category extends Model
 	public static function names()
 	{
 		$categories = self::latest()->get();
-        foreach($categories as $key => $value){
-            $categories[$key]['name'] = $value['name'];
-            $parentNames = self::parentNames($value['parent_id']);
-            if($parentNames != ''){
-                $categories[$key]['name'] .= ' < '.$parentNames;
-            }
-        }
+		foreach ($categories as $key => $value) {
+			$categories[$key]['name'] = $value['name'];
+			$parentNames = self::parentNames($value['parent_id']);
+			if ($parentNames != '') {
+				$categories[$key]['name'] .= ' < ' . $parentNames;
+			}
+		}
 
-        $selectCategories = [];
-        foreach($categories as $value){
-            $selectCategories[$value['id']] = $value['name'];
-        }        
-        $categories = $selectCategories;
+		$selectCategories = [];
+		foreach ($categories as $value) {
+			$selectCategories[$value['id']] = $value['name'];
+		}
+		$categories = $selectCategories;
 
-        return $categories;
+		return $categories;
 	}
-	
+
 	/**
 	 * return parent category name
 	 * @param integer $id
@@ -51,14 +52,13 @@ class Category extends Model
 	public static function parentNames($id)
 	{
 		$names = '';
-		while($id != null){
+		while ($id != null) {
 			$category = self::find($id);
-			if($category){
+			if ($category) {
 				$names .= $category->name;
 				$id = $category->parent_id;
 				$names .= $id != null ? ' < ' : '';
-			}
-			else{
+			} else {
 				$id = null;
 			}
 		}
@@ -68,6 +68,6 @@ class Category extends Model
 	public static function getPhotoUrl($image)
 	{
 		$base = \URL::to('/');
-		return $base.'/'.static::$_uploadPath.$image;
+		return $base . '/' . static::$_uploadPath . $image;
 	}
 }

@@ -64,8 +64,8 @@ class BlogCategoryController extends Controller
      */
     public function edit($id)
     {
-    	$bcategory = BlogCategory::findOrFail($id);
-        return view('admin.blog-categories.edit' , compact('bcategory'));
+        $bcategory = BlogCategory::findOrFail($id);
+        return view('admin.blog-categories.edit', compact('bcategory'));
     }
 
     /**
@@ -77,11 +77,11 @@ class BlogCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-    	$bcategory = BlogCategory::findOrFail($id);
+        $bcategory = BlogCategory::findOrFail($id);
         $bcategory->name = $request->input('name');
-        $bcategory->slug = ($bcategory->name == $bcategory->name) 
-                            ? $bcategory->slug
-                            : CustomHelper::generateSlug($bcategory->name, 'blog_categories');
+        $bcategory->slug = ($bcategory->name == $bcategory->name)
+            ? $bcategory->slug
+            : CustomHelper::generateSlug($bcategory->name, 'blog_categories');
         $bcategory->save();
 
         return redirect(route('blog-categories.index'))->with('success', 'Updated');

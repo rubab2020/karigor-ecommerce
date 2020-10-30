@@ -10,7 +10,7 @@ use App\Models\Bank_type;
 
 class VendorController extends Controller
 {
-    private $uploadPath = 'uploads/vendors/';
+    private $uploadPath = 'images/uploads/vendors/';
     /**
      * Display a listing of the resource.
      *

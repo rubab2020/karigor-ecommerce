@@ -22,8 +22,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $uplaodPath = $this->uploadPath;
         $categories = Category::get();
+        $uplaodPath = $this->uploadPath;
+        
         return view('admin.categories.index', compact('categories', 'uplaodPath'));
     }
 
@@ -81,9 +82,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $uplaodPath = $this->uploadPath;
     	$category = Category::findOrFail($id);
         $categories = Category::names();
+        $uplaodPath = $this->uploadPath;
 
         return view('admin.categories.edit' , compact('category', 'categories', 'uplaodPath'));
     }
@@ -104,8 +105,8 @@ class CategoryController extends Controller
         $category->parent_id = $request->input('parent_id');
         if($request->file('image')){
             $imageBgName = CustomHelper::saveImage($request->file('image'), 'uploads/categories/', 600, 600);
-            $category->image_bg = $imageBgName;
             $imageSmName = CustomHelper::saveImage($request->file('image'), 'uploads/categories/', 300, 300);
+            $category->image_bg = $imageBgName;
             $category->image_sm = $imageSmName;
         }
         if($request->file('icon')){

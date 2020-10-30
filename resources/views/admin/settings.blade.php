@@ -87,8 +87,7 @@
 @endsection
 
 @section('scripts')
-	<!-- {{--for ck editor--}} -->
-	<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+  <!-- ck editor -->
 	<script>
 		CKEDITOR.replace( 'editorAboutUs', {
 			filebrowserUploadUrl: "{{route('editor-image-upload', ['_token' => csrf_token() ])}}",

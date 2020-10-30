@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Slider extends Model
 {
     protected $table = 'sliders';
-    private static $_uploadPath = 'uploads/sliders/';
+    private static $_uploadPath = 'images/uploads/sliders/';
 
     public static function getPhotoUrl($image)
     {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-	private static $_uploadPath = 'uploads/categories/';
+	private static $_uploadPath = 'images/uploads/categories/';
 
 	public function scopeParent($query, $parentId)
 	{

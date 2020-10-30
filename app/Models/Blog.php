@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
-	// use Commentable;
+    private static $_uploadPath = 'images/uploads/blogs/';
+
+    public static function getUploadPath()
+		{
+			return static::$_uploadPath;
+		}
 }

@@ -5,7 +5,7 @@
     @include('partials.admin.form.edit-breadcrumbs', ['featureName' => 'blog'])
 
     {!! Form::model($blog, ['url' => '/admin/blogs/'.$blog->id, 'method'=>'PATCH', 'files' => 'true']) !!}
-      @include('admin.blog.form', ['submitButtonText' => 'Update'])
+      @include('admin.blogs.form', ['submitButtonText' => 'Update'])
     {!! Form::close() !!}
   </div>
 @endsection

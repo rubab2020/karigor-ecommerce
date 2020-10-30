@@ -9,7 +9,7 @@ use App\Karigor\Helpers\CustomHelper;
 
 class SliderController extends Controller
 {
-    private $uploadPath = 'uploads/sliders/';
+    private $uploadPath = 'images/uploads/sliders/';
     /**
      * Display a listing of the resource.
      *

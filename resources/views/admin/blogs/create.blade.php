@@ -11,7 +11,6 @@
 @endsection
 
 @section('scripts')
-<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 <script>
 	CKEDITOR.replace('description', {
 		filebrowserUploadUrl: "{{route('editor-image-upload', ['_token' => csrf_token() ])}}",

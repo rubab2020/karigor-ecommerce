@@ -19,7 +19,7 @@
           <div class="col-sm-10">
             {!! Form::file('cover_photo', null, ['class'=>'form-control']) !!}
             @if(isset($blog))
-              <img src="{{ asset($blog->cover_photo) }}" style="width:auto; height: 100px;">
+              <img src="{{ asset($uplaodPath.$blog->cover_photo_sm) }}" style="width:auto; height: 100px;">
             @endif
           </div>
         </div>
@@ -27,12 +27,6 @@
           <label for="example-search-input" class="col-sm-2 col-form-label">Description</label>
           <div class="col-sm-10">
             {!! Form::textarea('description', null, ['class'=>'form-control description']) !!}
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="example-search-input" class="col-sm-2 col-form-label">Mesenger Btn Upper Text</label>
-          <div class="col-sm-10">
-            {!! Form::text('msngr_btn_upper_text', null, ['class'=>'form-control']) !!}
           </div>
         </div>
 

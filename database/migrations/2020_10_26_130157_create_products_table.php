@@ -18,13 +18,13 @@ class CreateProductsTable extends Migration
 
             $table->bigInteger('vendor_id')->unsigned()->index();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
-            
+
             $table->string('sku');
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->string('thumbnail_bg');
-            $table->string('thumbnail_sm');
+            $table->string('image_bg');
+            $table->string('image_sm');
             $table->decimal('price', 10, 2);
             $table->decimal('sale_price', 10, 2);
             $table->date('sale_price_from')->nullable();

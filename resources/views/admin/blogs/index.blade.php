@@ -26,7 +26,7 @@
 											{{ App\Models\BlogCategory::getName($blog->category_id) }}
 										</td>
 										<td>
-											<img src="{{ asset($blog->cover_photo) }}" style="width: auto; height: 30px;">
+											<img src="{{ asset($uplaodPath.$blog->cover_photo_sm) }}" style="width: auto; height: 30px;">
 											{{ $blog->title }}
 										</td>
 										<td>{{ substr($blog->description, 0, 50) }}...</td>

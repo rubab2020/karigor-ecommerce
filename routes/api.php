@@ -31,5 +31,6 @@ Route::group([
 	Route::get('user-profile', 'AuthController@userProfile');
 
 	Route::get('categories', 'CategoryController@getCategories');
-
+	Route::get('sliders', 'SliderController@getSliders');
+	Route::get('blogCategories', 'Blog\BlogCategoryController@getBlogCategories');
 });

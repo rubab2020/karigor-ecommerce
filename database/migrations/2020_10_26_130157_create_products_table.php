@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
 
             $table->bigInteger('vendor_id')->unsigned()->index();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
-            
+
             $table->string('sku');
             $table->string('name');
             $table->string('slug')->unique();

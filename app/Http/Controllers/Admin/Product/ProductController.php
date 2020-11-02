@@ -33,8 +33,9 @@ class ProductController extends Controller
     public function create()
     {
         $Vendors = Vendor::pluck('name', 'id')->toArray();
+        $categories = Category::getParentChildCategories();
 
         // $categories = Category::parentCategories();
-        return view('admin.products.create', compact('Vendors'));
+        return view('admin.products.create', compact('Vendors', 'categories'));
     }		
 }

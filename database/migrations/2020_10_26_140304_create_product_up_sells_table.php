@@ -15,6 +15,10 @@ class CreateProductUpSellsTable extends Migration
     {
         Schema::create('product_up_sells', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('parent_id')->unsigned()->index();
+            $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
+            $table->bigInteger('child_id')->unsigned()->index();
+            $table->foreign('child_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }

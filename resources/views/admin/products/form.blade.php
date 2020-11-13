@@ -126,6 +126,18 @@
     <div class="card">
       <div class="card-body">
         <p>Attributes</p><hr>
+        <div class="form-group row">
+          <label for="example-text-input" class="col-sm-2 col-form-label">Attribute</label>
+          <div class="col-sm-10">
+            {!! Form::select('attribute', [null=>'Please Select']+$attributes, null, ['class'=>'form-control']) !!}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="example-text-input" class="col-sm-2 col-form-label">Options</label>
+          <div class="col-sm-10">
+            {!! Form::text('options', null, ['class'=>'form-control']) !!}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -175,6 +187,7 @@
     <div class="card">
       <div class="card-body right-section">
         <p>Tags</p><hr>
+        {!! Form::text('sale_price', null, ['class'=>'form-control']) !!}
       </div>
     </div>
   </div>
@@ -221,5 +234,7 @@
         $(this).parents().prev().prop('checked', false);
       }
     });
+
+    // attribute
   </script>
 @endsection

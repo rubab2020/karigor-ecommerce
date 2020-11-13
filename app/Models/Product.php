@@ -5,17 +5,36 @@ use App\Http\Middleware\Merchant;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Karigor\Helpers\EncodeHelper;
 
 class Product extends Model
 {
 	use SoftDeletes;
-    protected $dates = ['deleted_at'];
+  	protected $dates = ['deleted_at'];
 
-    public function images(){
+	private static $_uploadPath = 'images/uploads/products/';
+
+  	public function images(){
 		return $this->hasMany('App\Models\ProductImage', 'product_id');
 	}
 
-	public function productAttributes(){
+	public function categories(){
+		return $this->hasMany('App\Models\ProductAttribute', 'product_id');
+	}
+
+	public function attributes(){
+		return $this->hasMany('App\Models\ProductAttribute', 'product_id');
+	}
+
+	public function tags(){
+		return $this->hasMany('App\Models\ProductAttribute', 'product_id');
+	}
+
+	public function upSells(){
+		return $this->hasMany('App\Models\ProductAttribute', 'product_id');
+	}
+
+	public function crossSells(){
 		return $this->hasMany('App\Models\ProductAttribute', 'product_id');
 	}
 
@@ -35,4 +54,15 @@ class Product extends Model
 
 		return $salePrice;
 	}
+
+	public static function getPhotoUrl($image, $pid)
+    {
+        $encodeHelper = new EncodeHelper();
+        $base = \URL::to('/');
+        return $base 
+        . '/' 
+        . static::$_uploadPath 
+        . $encodeHelper->encodeData($pid) 
+        . $image;
+    }
 }

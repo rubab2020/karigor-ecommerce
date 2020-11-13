@@ -50,4 +50,8 @@ class Vendor extends Authenticatable
     public static function getVendorName($vid) {
         return self::where('id', $vid)->value('name');
     }
+
+    public static function getStoreSlug($vid) {
+        return self::where('id', $vid)->value('shop_slug');
+    }
 }

@@ -13,11 +13,11 @@
 					<a href="javascript:void(0);" class="waves-effect">
 						<i class="mdi mdi-view-list m-r-5"></i>
 						<span>
-							Products <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+							Catalog <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
 						</span>
 					</a>
 					<ul class="submenu">
-						<li><a href="/admin/products">All Products</a></li>
+						<li><a href="/admin/products">Products</a></li>
 						<li><a href="/admin/categories">Categories</a></li>
 						<li><a href="/admin/attributes">Attributes</a></li>
 						<li><a href="/admin/attribute-options">Attribute Options</a></li>

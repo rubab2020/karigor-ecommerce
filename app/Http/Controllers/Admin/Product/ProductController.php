@@ -9,6 +9,8 @@ use App\Models\Product;
 // use App\Models\ProductAttribute;
 use App\Models\Vendor;
 use App\Models\Category;
+use App\Models\Attribute;
+use App\Models\AttributeOption;
 // use App\Karigor\CustomHelper;
 
 class ProductController extends Controller
@@ -34,8 +36,10 @@ class ProductController extends Controller
     {
         $Vendors = Vendor::pluck('name', 'id')->toArray();
         $categories = Category::getParentChildCategories();
+        $attributes = Attribute::pluck('name', 'id')->toArray();
+        $attributeOptions = AttributeOption::getAttributeMappedOptions();
 
         // $categories = Category::parentCategories();
-        return view('admin.products.create', compact('Vendors', 'categories'));
+        return view('admin.products.create', compact('Vendors', 'categories', 'attributes', 'attributeOptions'));
     }		
 }

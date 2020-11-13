@@ -30,7 +30,14 @@ Route::group([
 	Route::post('refresh-token', 'AuthController@refreshToken');
 	Route::get('user-profile', 'AuthController@userProfile');
 
-	Route::get('categories', 'CategoryController@getCategories');
+	// settings
 	Route::get('sliders', 'SliderController@getSliders');
+
+	// blogs
+	Route::get('categories', 'CategoryController@getCategories');
 	Route::get('blogCategories', 'Blog\BlogCategoryController@getBlogCategories');
+
+	// products
+	Route::get('products', 'ProductController@getProducts');
+	Route::get('products/{id}', 'ProductController@getProductDetails');
 });

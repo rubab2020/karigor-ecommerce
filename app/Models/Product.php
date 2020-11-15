@@ -19,7 +19,7 @@ class Product extends Model
 	}
 
 	public function categories(){
-		return $this->hasMany('App\Models\ProductAttribute', 'product_id');
+		return $this->hasMany('App\Models\ProductCategory', 'product_id');
 	}
 
 	public function attributes(){
@@ -27,15 +27,15 @@ class Product extends Model
 	}
 
 	public function tags(){
-		return $this->hasMany('App\Models\ProductAttribute', 'product_id');
+		return $this->hasMany('App\Models\ProductTag', 'product_id');
 	}
 
 	public function upSells(){
-		return $this->hasMany('App\Models\ProductAttribute', 'product_id');
+		return $this->hasMany('App\Models\ProductUpSell', 'product_id');
 	}
 
 	public function crossSells(){
-		return $this->hasMany('App\Models\ProductAttribute', 'product_id');
+		return $this->hasMany('App\Models\ProductCrossSell', 'product_id');
 	}
 
 	public static function getSalePrice($salePrice, $salePriceFrom, $salePriceTo) {

@@ -27,7 +27,7 @@ class ProductController extends ApiController
 
     public function getProducts()
     {
-        $products = Products::get();
+        $products = Product::get();
 
         return $this->respond([
             'products' => $this->productsTransformer->transformCollection($products->toArray())

@@ -210,13 +210,13 @@
         <div class="form-group row">
           <div class="col-sm-12">
             <label>Up Sells</label>
-            {!! Form::select('up_sell', [], null, ['class'=>'form-control', 'id'=> 'upSell', 'multiple'=>'multiple']) !!}
+            {!! Form::select('up_sells', [], null, ['class'=>'form-control', 'id'=> 'upSell', 'multiple'=>'multiple']) !!}
           </div>  
         </div>
         <div class="form-group row">
           <div class="col-sm-12">
             <label>Cross Sells</label>
-            {!! Form::select('cross_sell', [], null, ['class'=>'form-control', 'id'=> 'crossSell', 'multiple'=>'multiple']) !!}
+            {!! Form::select('cross_sells', [], null, ['class'=>'form-control', 'id'=> 'crossSell', 'multiple'=>'multiple']) !!}
           </div>
         </div>
       </div>

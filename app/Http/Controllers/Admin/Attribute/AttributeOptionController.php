@@ -104,4 +104,10 @@ class AttributeOptionController extends Controller
 
         return back()->with('success', 'Deleted');
     }
+
+    public function getAttrOptionsByAttrId(Request $request)
+    {
+        $attrOptions = AttributeOption::where('attribute_id', $request->input('attributeId'))->pluck('name', 'id');
+        return response()->json($attrOptions);
+    }
 }

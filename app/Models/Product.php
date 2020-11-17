@@ -55,14 +55,34 @@ class Product extends Model
 		return $salePrice;
 	}
 
+	public static function getPhotoPath($pid)
+	{
+		$encodeHelper = new EncodeHelper();
+      	$base = \URL::to('/');
+      	return $base 
+      		. '/' 
+      		. static::$_uploadPath 
+      		. $encodeHelper->encodeData($pid)
+      		. '/';
+	}
+
 	public static function getPhotoUrl($image, $pid)
+	{
+      	$encodeHelper = new EncodeHelper();
+      	$base = \URL::to('/');
+      	return $base 
+      		. '/' 
+      		. static::$_uploadPath 
+      		. $encodeHelper->encodeData($pid) 
+      		. '/'
+      		. $image;
+    }
+
+    public static function getLastDataId()
     {
-        $encodeHelper = new EncodeHelper();
-        $base = \URL::to('/');
-        return $base 
-        . '/' 
-        . static::$_uploadPath 
-        . $encodeHelper->encodeData($pid) 
-        . $image;
+    	$data = select('id')->orderBy('id', 'desc')->first();	
+    	if($data== null) 
+    		return 1;
+		return $data->id;
     }
 }

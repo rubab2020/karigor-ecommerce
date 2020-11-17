@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
 
     // attributes
     Route::resource('attributes', 'Admin\Attribute\AttributeController');
+    Route::post('get-attirbute-options', 'Admin\Attribute\AttributeOptionController@getAttrOptionsByAttrId');
     Route::resource('attribute-options', 'Admin\Attribute\AttributeOptionController');
 
     // products

@@ -129,13 +129,13 @@
         <div class="form-group row">
           <label for="example-text-input" class="col-sm-2 col-form-label">Attribute</label>
           <div class="col-sm-10">
-            {!! Form::select('attribute', [null=>'Please Select']+$attributes, null, ['class'=>'form-control']) !!}
+            {!! Form::select('attribute', [null=>'Please Select']+$attributes, null, ['class'=>'form-control', 'id'=>'attribute']) !!}
           </div>
         </div>
         <div class="form-group row">
           <label for="example-text-input" class="col-sm-2 col-form-label">Options</label>
           <div class="col-sm-10">
-            {!! Form::text('options', null, ['class'=>'form-control']) !!}
+            {!! Form::select('attribute_options', [],  null, ['class'=>'form-control', 'id'=> 'attrOptions', 'multiple'=>'multiple']) !!}
           </div>
         </div>
       </div>
@@ -150,14 +150,54 @@
         <p>Categories</p><hr>
         <div class="parent">
           @foreach($categories as $category)
-            <input type="checkbox" name="" value=""> {{ $category->name }}
+            <input type="checkbox" name="categories[]" value=""> {{ $category->name }}
             <div>
               @foreach($category->sub_categories as $subCategory)
-                <input type="checkbox" name="" value=""> {{ $subCategory->name }}
+                <input type="checkbox" name="sub_categories[]" value=""> {{ $subCategory->name }}
                 <br>
               @endforeach
             </div>
           @endforeach
+        </div>
+      </div>
+    </div>
+
+    <!-- inventory -->
+    <div class="card">
+      <div class="card-body right-section">
+        <p>Inventory</p><hr>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label>SKU</label>
+            {!! Form::text('sku', null, ['class'=>'form-control', 'readonly'=>'readonly']) !!}
+          </div>  
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label>Stock Quantity</label>
+            {!! Form::text('stock_quantity', null, ['class'=>'form-control']) !!}
+          </div>  
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label>Low Stock Threshold</label>
+            {!! Form::text('low_stock_threshold', null, ['class'=>'form-control']) !!}
+          </div>  
+        </div>
+      </div>
+    </div>
+
+    <!-- shipping -->
+    <div class="card">
+      <div class="card-body right-section">
+        <p>Shipping</p><hr>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label>Weight</label>
+            {!! Form::text('weight', null, ['class'=>'form-control']) !!}
+          </div>  
         </div>
       </div>
     </div>
@@ -170,14 +210,13 @@
         <div class="form-group row">
           <div class="col-sm-12">
             <label>Up Sells</label>
-            {!! Form::text('price', null, ['class'=>'form-control']) !!}
+            {!! Form::select('up_sell', [], null, ['class'=>'form-control', 'id'=> 'upSell', 'multiple'=>'multiple']) !!}
           </div>  
-
         </div>
         <div class="form-group row">
           <div class="col-sm-12">
             <label>Cross Sells</label>
-            {!! Form::text('sale_price', null, ['class'=>'form-control']) !!}
+            {!! Form::select('cross_sell', [], null, ['class'=>'form-control', 'id'=> 'crossSell', 'multiple'=>'multiple']) !!}
           </div>
         </div>
       </div>
@@ -187,7 +226,21 @@
     <div class="card">
       <div class="card-body right-section">
         <p>Tags</p><hr>
-        {!! Form::text('sale_price', null, ['class'=>'form-control']) !!}
+        {!! Form::select('tags', [], null, ['class'=>'form-control', 'id'=> 'tags', 'multiple'=>'multiple']) !!}
+      </div>
+    </div>
+
+    <!-- Others -->
+    <div class="card">
+      <div class="card-body right-section">
+        <p>Others</p><hr>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label>Note</label>
+            {!! Form::text('purchase_note', null, ['class'=>'form-control']) !!}
+          </div>  
+        </div>
       </div>
     </div>
   </div>
@@ -212,29 +265,100 @@
       filebrowserUploadMethod: 'form'
     });
   </script>
+
   <script type="text/javascript">
-    $('#salePriceFrom').datepicker({
-      format: "yyyy-mm-dd"
-    });
-    $('#salePriceTo').datepicker({
-      format: "yyyy-mm-dd"
-    });
+    $(document).ready(function () {
+      // global call of csrf token. use ajax call below this function
+      $.ajaxSetup({
+        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
+      });
 
-    // multi hiarchy select
-    $('input').change(function(){
-      var status = false;
-      $(this).next().find('input').prop('checked', this.checked); 
-      status = ($(this).parent().find('> input').not(':checked').length === 0);
-      $(this).parent().prev().prop('checked', status);
-      console.log(status)
-      if(status){
-          $(this).parent().prev().trigger("change");
-      }
-      else{
-        $(this).parents().prev().prop('checked', false);
-      }
-    });
+      // multi hiarchy select
+      $('input').change(function(){
+        var status = false;
+        $(this).next().find('input').prop('checked', this.checked); 
+        status = ($(this).parent().find('> input').not(':checked').length === 0);
+        $(this).parent().prev().prop('checked', status);
+        console.log(status)
+        if(status){
+            $(this).parent().prev().trigger("change");
+        }
+        else{
+          $(this).parents().prev().prop('checked', false);
+        }
+      });
 
-    // attribute
+      // price
+      $('#salePriceFrom').datepicker({
+        format: "yyyy-mm-dd"
+      });
+      $('#salePriceTo').datepicker({
+        format: "yyyy-mm-dd"
+      });
+
+      // attribute
+      $('#attrOptions').select2({
+        data: [],
+        tags: false,
+        tokenSeparators: [','],
+        placeholder: "Select or type keywords",
+      });
+      $('#attribute').change(function(){
+        let attributeId = $(this).val();
+        $.ajax({
+          type: "POST",
+          url: "/admin/get-attirbute-options",
+          data: {attributeId},
+          async: false,
+          dataType: 'json'
+        }).done(function (resp) {
+          let attrOptions = [];
+          Object.keys(resp).forEach(key => {
+            attrOptions.push({ id: key, text: resp[key] });
+          })
+
+          $('#attrOptions').select2({
+            data: attrOptions
+          });
+
+        }).fail(function (err) {
+          alert("Something went wrong. Please try again");
+        });
+      });
+
+      // tags
+      let tags = <?php echo json_encode($tags) ?>;
+      let tagOptions = [];
+      Object.keys(tags).forEach(key => {
+        tagOptions.push({ id: key, text: tags[key] });
+      })
+      $('#tags').select2({
+        data: tagOptions,
+        tags: false,
+        tokenSeparators: [','],
+        placeholder: "Select or type keywords",
+      });
+
+      // up sell
+      let products = <?php echo json_encode($products) ?>;
+      let productOptions = [];
+      Object.keys(products).forEach(key => {
+        productOptions.push({ id: key, text: products[key] });
+      })
+      $('#upSell').select2({
+        data: productOptions,
+        tags: false,
+        tokenSeparators: [','],
+        placeholder: "Select or type keywords",
+      });
+      // cross sell
+      $('#crossSell').select2({
+        data: productOptions,
+        tags: false,
+        tokenSeparators: [','],
+        placeholder: "Select or type keywords",
+      });
+
+    });
   </script>
 @endsection

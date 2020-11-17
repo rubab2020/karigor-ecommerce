@@ -17,6 +17,7 @@
     <link href="{{asset('admin/css/icons.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('admin/css/style.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
 
     <!-- custom -->
     <style type="text/css">
@@ -112,6 +113,8 @@
       </div>
 
       <script src="{{asset('admin/js/jquery.min.js')}}"></script>
+      <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="crossorigin="anonymous"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
       <script src="{{asset('admin/js/bootstrap.bundle.min.js')}}"></script>
       <script src="{{asset('admin/js/metisMenu.min.js')}}"></script>
       <script src="{{asset('admin/js/jquery.slimscroll.js')}}"></script>

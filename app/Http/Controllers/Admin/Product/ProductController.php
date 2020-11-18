@@ -18,18 +18,18 @@ use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductAttribute;
 use App\Models\ProductTag;
-// use App\Karigor\CustomHelper;
+use App\Karigor\Helpers\CustomHelper;
 
 class ProductController extends Controller
 {
-	/**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $products = Product::with('images', 'productAttributes')->get();
+        $products = Product::with('images', 'attributes')->get();
         return view('admin.products.index', compact('products'));
     }
 
@@ -48,11 +48,11 @@ class ProductController extends Controller
         $products = Product::pluck('name', 'id')->toArray();
 
         return view('admin.products.create', compact(
-            'Vendors', 
-            'categories', 
-            'attributes', 
-            'attributeOptions', 
-            'tags', 
+            'Vendors',
+            'categories',
+            'attributes',
+            'attributeOptions',
+            'tags',
             'products'
         ));
     }
@@ -65,29 +65,30 @@ class ProductController extends Controller
      */
     public function store(Request $request, Product $product)
     {
+
         $lastProductId =  Product::getLastDataId();
         $photoUploadPath = Product::getPhotoPath($lastProductId);
 
         $imageBgName = CustomHelper::saveImage($request->file('image'), $photoUploadPath, 600, 600);
         $imageSmName = CustomHelper::saveImage($request->file('image'), $photoUploadPath, 300, 300);
 
-        $product->vendor_id = $request->input('vendor_id');
+        $product->vendor_id = $request->input('vendor_id') ?? 1; //should be validated
         $product->name = $request->input('name');
         $product->slug = \Str::slug($request->input('name'), '-');
-        $product->image_bg = $imageBgName;
-        $product->image_sm = $imageSmName;
+        $product->image_bg = $imageBgName ?? "aa";  //should be validated
+        $product->image_sm = $imageSmName ?? "bb";  // should be validated
         $product->description = $request->input('description');
         $product->price = $request->input('price');
-        $product->sale_price = $request->input('sale_price');
+        $product->sale_price = $request->input('sale_price') ?? 0; //should be validated
         $product->sale_price_from = $request->input('sale_price_from');
         $product->sale_price_to = $request->input('sale_price_to');
-        $proudct->sku = $request->input('sku');
-        $proudct->stock_quantity = $request->input('stock_quantity');
-        $proudct->low_stock_threshold = $request->input('low_stock_threshold');
-        $proudct->weight = $request->input('weight');
-        $proudct->purchase_note = $request->input('purchase_note');
+        $product->sku = $request->input('sku');
+        $product->stock_quantity = $request->input('stock_quantity') ?? 100; //should be validated;
+        $product->low_stock_threshold = $request->input('low_stock_threshold');
+        $product->weight = $request->input('weight');
+        $product->purchase_note = $request->input('purchase_note');
 
-        if($product->save()) {
+        if ($product->save()) {
             $this->saveImages($request->file('images'), $product->id);
             $this->saveCategories($request->input('categories'), $request->input('sub_categories'), $product->id);
             $this->saveAttributes($request->input('attribute'), $request->input('attribute_options'), $product->id);
@@ -100,10 +101,10 @@ class ProductController extends Controller
 
     private function saveImages($images, $productId)
     {
-        if($images){
-            foreach($images as $image){
+        if ($images) {
+            foreach ($images as $image) {
                 $imageBgName = $imageSmName = $photoUploadPath = null;
-                
+
                 $photoUploadPath = Product::getPhotoPath($product->id);
                 $imageBgName = CustomHelper::saveImage($image, $photoUploadPath, 600, 600);
                 $imageSmName = CustomHelper::saveImage($image, $photoUploadPath, 600, 600);
@@ -119,53 +120,59 @@ class ProductController extends Controller
 
     private function saveCategories($categories, $subCategoires, $productId)
     {
-        foreach($categories as $catgory) {
-            $category = new ProductCategory;
-            $category->product_id = $productId;
-            $category->category_id = $category;
+        foreach ($categories as $category) {
+            $newCategory = new ProductCategory;
+            $newCategory->product_id = $productId;
+            $newCategory->category_id = $category;
+            $newCategory->save();  
         }
-        foreach($subCategoires as $catgory) {
-            $category = new ProductCategory;
-            $category->product_id = $productId;
-            $category->category_id = $category;
-        }
+        if ($subCategoires) //checking if null
+            foreach ($subCategoires as $category) {
+                $newCategory = new ProductCategory;
+                $newCategory->product_id = $productId;
+                $newCategory->category_id = $category;
+                $newCategory->save();
+            }
     }
 
     private function saveAttributes($attribute, $attributeOptions, $productId)
     {
-        foreach($attributeOptions as $attrOption) {
-            $option = new ProductAttribute;
-            $option->product_id = $productId;
-            $option->attribute = $attribute;
-            $option->value = $attrOption;
-            $option->save();
-        }
+        if ($attributeOptions)  // checkif if null, 
+            foreach ($attributeOptions as $attrOption) {
+                $option = new ProductAttribute;
+                $option->product_id = $productId;
+                $option->attribute = $attribute;
+                $option->value = $attrOption;
+                $option->save();
+            }
     }
 
     private function saveTags($tags, $productId)
     {
-        foreach($tags as $tag) {
-            $option = new ProductAttribute;
-            $option->product_id = $productId;
-            $option->tag_id = $tag;
-            $option->save();
-        }
+        if ($tags)  // checking if null
+            foreach ($tags as $tag) {
+                $option = new ProductAttribute;
+                $option->product_id = $productId;
+                $option->tag_id = $tag;
+                $option->save();
+            }
     }
 
     private function saveLinkedProducts($upsells, $crossSells, $productId)
     {
-        foreach($upsells as $upsell){
-            $product = new ProductUpSell;
-            $product->parent_id = $productId;
-            $product->child_id = $upsell;
-            $product->save();
-        }
-
-        foreach($crossSells as $upsell){
-            $product = new ProductCrossSell;
-            $product->parent_id = $productId;
-            $product->child_id = $upsell;
-            $product->save();
-        }
+        if ($upsells)
+            foreach ($upsells as $upsell) {
+                $product = new ProductUpSell;
+                $product->parent_id = $productId;
+                $product->child_id = $upsell;
+                $product->save();
+            }
+        if ($crossSells)
+            foreach ($crossSells as $upsell) {
+                $product = new ProductCrossSell;
+                $product->parent_id = $productId;
+                $product->child_id = $upsell;
+                $product->save();
+            }
     }
 }

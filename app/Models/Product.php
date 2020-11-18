@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Karigor\Helpers\EncodeHelper;
+use BinaryCats\Sku\HasSku;
 
 class Product extends Model
 {
 	use SoftDeletes;
+	use HasSku;
   	protected $dates = ['deleted_at'];
 
 	private static $_uploadPath = 'images/uploads/products/';
@@ -80,7 +82,7 @@ class Product extends Model
 
     public static function getLastDataId()
     {
-    	$data = select('id')->orderBy('id', 'desc')->first();	
+    	$data = Product::select('id')->orderBy('id', 'desc')->first();	
     	if($data== null) 
     		return 1;
 		return $data->id;

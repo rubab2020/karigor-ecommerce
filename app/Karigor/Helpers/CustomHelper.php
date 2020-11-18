@@ -16,6 +16,7 @@ class CustomHelper
   	{
 		$imageLink = '';
 		$imageQuality = 75;
+		$fileName = null;
 
 		if($image){
 			if(!is_dir($path)){

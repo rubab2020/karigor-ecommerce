@@ -150,7 +150,7 @@
         <p>Categories</p><hr>
         <div class="parent">
           @foreach($categories as $category)
-            <input type="checkbox" name="categories[]" value=""> {{ $category->name }}
+        <input type="checkbox" name="categories[]" value="{{$category->id}}"> {{ $category->name }}
             <div>
               @foreach($category->sub_categories as $subCategory)
                 <input type="checkbox" name="sub_categories[]" value=""> {{ $subCategory->name }}

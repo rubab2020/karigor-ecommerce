@@ -33,8 +33,11 @@ Route::group([
 	// settings
 	Route::get('sliders', 'SliderController@getSliders');
 
-	// blogs
+	//categories
 	Route::get('categories', 'CategoryController@getCategories');
+	Route::get('categories/{slug}', 'CategoryController@getCategory');
+
+	// blogs
 	Route::get('blogCategories', 'Blog\BlogCategoryController@getBlogCategories');
 
 	// products

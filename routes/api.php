@@ -42,5 +42,5 @@ Route::group([
 
 	// products
 	Route::get('products', 'ProductController@getProducts');
-	Route::get('products/{id}', 'ProductController@getProductDetails');
+	Route::get('products/{sku}', 'ProductController@getProduct');
 });

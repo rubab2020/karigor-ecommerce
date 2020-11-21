@@ -18,8 +18,8 @@ class Vendor extends Authenticatable
         'password', 
         'photo',
         'phone',
-        'store_name',
-        'store_slug',
+        'shop_name',
+        'shop_slug',
         'brand_logo',
         'brand_banner',
         'gender',
@@ -53,5 +53,12 @@ class Vendor extends Authenticatable
 
     public static function getStoreSlug($vid) {
         return self::where('id', $vid)->value('shop_slug');
+    }
+
+    public static function getStoreIdBySlug($slug) {
+        $id = self::where('shop_slug', $slug)->select('id')->first();
+        if($id)
+            return $id->id;
+        return null;    
     }
 }

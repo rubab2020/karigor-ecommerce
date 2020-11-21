@@ -48,7 +48,7 @@ class ProductDetailsTransformer extends Transformer
             ],
             'image_bg' => Product::getPhotoUrl($product['image_bg'], $product['id']),
             'image_sm' => Product::getPhotoUrl($product['image_sm'], $product['id']),
-            'images' => $this->tranformImages(ProductImage::getImages($product['id'])),
+            'images' => $this->transformImages(ProductImage::getImages($product['id'])),
             'categories' => $this->transformCategories($product['categories']),
             'attributes' => $this->transformTags($product['tags']),
             'tags' => $this->transformAttributes($product['attributes']),
@@ -166,6 +166,8 @@ class ProductDetailsTransformer extends Transformer
      **/
     public function transformUpSells($upSells)
     {
+        if(!$upSells)
+            return [];
         return array_map([$this, 'transformUpSell'], is_array($upSells) ? $upSells : $upSells->toArray());
     }
 
@@ -191,6 +193,8 @@ class ProductDetailsTransformer extends Transformer
      **/
     public function transformCrossSells($crossSells)
     {
+        if(!$crossSells)
+            return [];
         return array_map([$this, 'transformCrossSell'], is_array($crossSells) ? $crossSells : $crossSells->toArray());
     }
 

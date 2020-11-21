@@ -71,15 +71,23 @@ class Category extends Model
 		return $base . '/' . static::$_uploadPath . $image;
 	}
 
-	public static function getParentChildCategories() 
+	public static function getParentChildCategories()
 	{
 		$categories = [];
 		$parents = self::where('parent_id', null)->get();
-		foreach($parents as $key => $parent) {
+		foreach ($parents as $key => $parent) {
 			$childrens = self::where('parent_id', $parent->id)->get();
 			$categories[$key] = $parent;
 			$categories[$key]['sub_categories'] = $childrens;
 		}
-		return $categories; 
+		return $categories;
+	}
+
+	public static function getCategoryIdBySlug($slug)
+	{
+		$category = self::where('slug', $slug)->select('id')->first();
+		if ($category)
+			return $category->id;
+		return null;
 	}
 }

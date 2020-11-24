@@ -43,4 +43,9 @@ Route::group([
 	// products
 	Route::get('products', 'ProductController@getProducts');
 	Route::get('products/{sku}', 'ProductController@getProduct');
+
+	// wishlist
+	Route::get('wishlist/mine', 'WishlistController@getUserWishlist');
+	Route::post('wishlist/mine', 'WishlistController@store');
+	Route::delete('wishlist/mine/{id}', 'WishlistController@remove');
 });

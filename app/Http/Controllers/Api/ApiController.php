@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Api;
+
 use App\Http\Controllers\Api\Controller;
 
 class ApiController extends Controller
@@ -37,28 +39,22 @@ class ApiController extends Controller
     public function respondWithError($message)
     {
         return $this->respond([
-            'error' => [
-                'message' => $message
-            ]
+            'message' => $message
         ]);
     }
 
     public function respondWithSuccess($message)
     {
         return $this->respond([
-            'success' => [
-                'message' => $message
-            ]
+            'message' => $message
         ]);
     }
 
     public function respondWithSuccessWithData($message, $data)
     {
         return $this->respond([
-            'success' => [
-                'message' => $message,
-                'data'  => $data
-            ]
+            'message' => $message,
+            'data'  => $data
         ]);
     }
 
@@ -103,11 +99,11 @@ class ApiController extends Controller
     }
 
     public function respondCreatingResourceWithData(
-        $message = 'Created Successfully', 
+        $message = 'Created Successfully',
         $data
-    ){
+    ) {
         return $this->setStatusCode(201)
-                ->respondWithSuccessWithData($message, $data);
+            ->respondWithSuccessWithData($message, $data);
     }
 
     public function respondUpdatingResource($message = 'Updated Successfully')

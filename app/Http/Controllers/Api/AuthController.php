@@ -16,7 +16,7 @@ class AuthController extends ApiController
     {
         $this->encodeHelper = $encodeHelper;
         
-        $this->middleware('auth:api', ['except' => [
+        $this->middleware('jwt', ['except' => [
             'login', 
             'register' 
             ]
@@ -58,6 +58,7 @@ class AuthController extends ApiController
         $rules = $this->registerValidation($credentials);
         $validator = Validator::make($credentials, $rules);
         if ($validator->fails()) {
+            //return response()->json(['message' => 'wrong'], 400);
             return $this->respondValidationErrors($validator->messages());
         }
 

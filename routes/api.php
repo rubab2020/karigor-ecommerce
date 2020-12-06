@@ -28,7 +28,7 @@ Route::group([
 	Route::post('register', 'AuthController@register');
 	Route::post('logout', 'AuthController@logout');
 	Route::post('refresh-token', 'AuthController@refreshToken');
-	Route::get('user-profile', 'AuthController@userProfile');
+	Route::get('profiles/mine', 'AuthController@userProfile');
 
 	// settings
 	Route::get('sliders', 'SliderController@getSliders');
@@ -45,7 +45,21 @@ Route::group([
 	Route::get('products/{sku}', 'ProductController@getProduct');
 
 	// wishlist
-	Route::get('wishlist/mine', 'WishlistController@getUserWishlist');
-	Route::post('wishlist/mine', 'WishlistController@store');
-	Route::delete('wishlist/mine/{id}', 'WishlistController@remove');
+	Route::get('wishlists/mine', 'WishlistController@getUserWishlist');
+	Route::post('wishlists/mine', 'WishlistController@store');
+	Route::delete('wishlists/mine/{id}', 'WishlistController@remove');
+
+	//cart
+	Route::resource('carts/mine', 'CartController');
+
+	//cart item
+	Route::resource('/carts/mine/items', 'CartItemController');
+
+	//home
+	Route::get('home', 'HomeController@getHome');
+
+	//order
+	Route::get('order/delivery-charge', 'OrderController@getDeliveryCharge');
+	Route::post('order/place-order', 'OrderController@placeOrder');
+
 });

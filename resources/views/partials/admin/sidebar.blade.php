@@ -26,6 +26,17 @@
 				</li>
 				<li>
 					<a href="javascript:void(0);" class="waves-effect">
+						<i class="mdi mdi-view-list m-r-5"></i>
+						<span>
+							Sales <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+						</span>
+					</a>
+					<ul class="submenu">
+						<li><a href="/admin/orders">Orders</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0);" class="waves-effect">
 						<i class="mdi mdi-pencil m-r-5"></i>
 						<span>
 							Blogs

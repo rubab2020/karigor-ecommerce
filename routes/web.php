@@ -63,6 +63,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('vendors', 'Admin\VendorController');
     Route::post('vendors/toggle-activation', 'Admin\VendorController@toggleActivation')->name('admin.vendors.toggle-activation');
     Route::post('vendors/toggle-feature', 'Admin\VendorController@toggleFeature')->name('admin.vendors.toggle-feature');
+
+    //orders
+    Route::resource('orders', 'Admin\Order\OrderController');
 });
 
 

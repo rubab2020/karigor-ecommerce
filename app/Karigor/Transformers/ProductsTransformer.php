@@ -31,7 +31,7 @@ class ProductsTransformer extends Transformer
     public function transform($product)
     {
         return [
-            'id' => $this->encodeHelper->encodeData($product['id']),
+            'id' => $product['id'],
             'url' => $this->baseUrl.$product['slug'],
             'name' => $product['name'],
             'price' => $product['price'],

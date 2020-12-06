@@ -82,6 +82,7 @@ class ProductController extends Controller
         $product->sale_price = $request->input('sale_price') ?? 0; //should be validated
         $product->sale_price_from = $request->input('sale_price_from');
         $product->sale_price_to = $request->input('sale_price_to');
+        $product->discount_percent = $request->input('sale_price') / $request->input('price') * 100; //discount, should be inserted from form
         $product->sku = $request->input('sku');
         $product->stock_quantity = $request->input('stock_quantity') ?? 100; //should be validated;
         $product->low_stock_threshold = $request->input('low_stock_threshold');

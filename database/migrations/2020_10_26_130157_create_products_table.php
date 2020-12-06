@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('image_sm');
             $table->decimal('price', 10, 2);
             $table->decimal('sale_price', 10, 2);
+            $table->decimal('discount_percent', 10, 2)->default(0);
             $table->date('sale_price_from')->nullable();
             $table->date('sale_price_to')->nullable();
             $table->decimal('weight', 10, 2)->nullable();

@@ -79,7 +79,7 @@ class ProductController extends ApiController
     {
 
         $sku = $request->sku;
-        $product = Product::with(['images', 'categories', 'tags', 'attributes'])->where('sku', $sku)->first();
+        $product = Product::with(['images', 'tags', 'attributes'])->where('sku', $sku)->first();
         if (!$product)
             return $this->respondNotFound('Product Not Found.');
 

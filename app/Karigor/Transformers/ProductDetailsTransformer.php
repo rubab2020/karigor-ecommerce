@@ -32,10 +32,11 @@ class ProductDetailsTransformer extends Transformer
     public function transform($product)
     {
         return [
-            'id' => $this->encodeHelper->encodeData($product['id']),
+            'id' => $product['id'],
             'url' => $this->baseUrl.$product['slug'],
             'name' => $product['name'],
             'price' => $product['price'],
+            'description' => $product['description'],
             'sale_price' => Product::getSalePrice(
                 $product['sale_price'],
                 $product['sale_price_from'],
@@ -49,7 +50,7 @@ class ProductDetailsTransformer extends Transformer
             'image_bg' => Product::getPhotoUrl($product['image_bg'], $product['id']),
             'image_sm' => Product::getPhotoUrl($product['image_sm'], $product['id']),
             'images' => $this->transformImages(ProductImage::getImages($product['id'])),
-            'categories' => $this->transformCategories($product['categories']),
+            //'categories' => $this->transformCategories($product['categories']),
             'attributes' => $this->transformTags($product['tags']),
             'tags' => $this->transformAttributes($product['attributes']),
             'up_sells' => $this->transformUpSells($product['up_sells']),
